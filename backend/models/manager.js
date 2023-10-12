@@ -1,9 +1,9 @@
 module.exports=(sequelize,DataTypes)=>{
-    const admin=sequelize.define("admin", {
-        id: {
-            type: DataTypes.INTEGER,
-            autoIncrement: true,
-            primaryKey: true
+    const manager=sequelize.define("manager", {
+        id:{
+            type:DataTypes.INTEGER,
+            autoIncrement:true,
+            primaryKey:true,
         },
         id_tag:{
             type: DataTypes.STRING,
@@ -12,7 +12,6 @@ module.exports=(sequelize,DataTypes)=>{
                 notEmpty:true
             },
         },
-
         full_identification:{
             type:DataTypes.STRING,
             allowNull:true,
@@ -20,7 +19,13 @@ module.exports=(sequelize,DataTypes)=>{
                 notEmpty:true,
             },
         },
-                     
+        username: {
+            type:DataTypes.STRING,
+            allowNull:true,
+            validate:{
+                notEmpty:true,
+            },
+        },
         full_name:{
             type:DataTypes.STRING,
             allowNull:false,
@@ -28,6 +33,7 @@ module.exports=(sequelize,DataTypes)=>{
                 notEmpty:true
             },
         },
+      
         email:{
             type:DataTypes.STRING,
             allowNull:false,
@@ -58,11 +64,17 @@ module.exports=(sequelize,DataTypes)=>{
                 notEmpty:true
             },
         },
-    
-    },{
+        
+}
+    ,{
         freezeTableName:true,
-        tableName:'admin',
+        tableName:'manager',
         underscored:true
     })
-    return admin
+
+    // manager.associate=(models)=>{
+    //     manager.hasMany(models.instructor,{foreignKey:"instructor_id"})
+    //     instructor.hasMany(models.attendance,{foreignKey:"instructor_id"})
+    // }
+    return manager
 }

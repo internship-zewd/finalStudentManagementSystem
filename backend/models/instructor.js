@@ -14,13 +14,6 @@ module.exports = (sequelize, DataTypes) => {
             notEmpty: true,
           },
         },
-        username: {
-          type: DataTypes.STRING,
-          allowNull: true,
-          validate: {
-            notEmpty: true,
-          },
-        },
         full_identification: {
           type: DataTypes.STRING,
           allowNull: true,
@@ -72,10 +65,10 @@ module.exports = (sequelize, DataTypes) => {
       }
     );
   
-    // instructor.associate = (models) => {
-    //   instructor.hasMany(models.classs, { foreignKey: 'instructor_id', onDelete: 'CASCADE', onUpdate: 'CASCADE' });
-    //   instructor.hasMany(models.attendance, { foreignKey: 'instructor_id', onDelete: 'CASCADE', onUpdate: 'CASCADE' });
-    // };
+    instructor.associate = (models) => {
+      instructor.hasMany(models.class_room, { foreignKey: 'instructor_id', onDelete: 'CASCADE', onUpdate: 'CASCADE' });
+      instructor.hasMany(models.attendance, { foreignKey: 'instructor_id', onDelete: 'CASCADE', onUpdate: 'CASCADE' });
+    };
   
     return instructor;
   };

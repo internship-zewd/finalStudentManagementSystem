@@ -1,0 +1,134 @@
+.dashboard {
+    background-color: var(--panel-color);
+    padding: 10px 14px;
+    display: flex;
+    flex-direction: column;
+   
+}
+
+.top {
+    display: flex;
+    top: 0;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 10%;
+    padding: 10px 14px;
+    background-color: var(--dark-color);
+    z-index: 10px;
+}
+
+.top .sidebarToggle {
+    font-size: 26px;
+    color: var(--text-color);
+    cursor: pointer;
+
+}
+
+
+ .top .searchBox {
+    position: relative;
+    height: 35px;
+    max-width: 250px;
+    width: 100%;
+    margin-left: 30px;
+    margin-right: 180px;
+
+}
+
+.top .searchBox input {
+    position: absolute;
+    border: 1px solid var(--boarder-color);
+    background-color: var(--panel-color);
+    padding: 0 25px 0 50px;
+    border-radius: 5px;
+    height: 100%;
+    width: 100%;
+    color: var(--text-color);
+    font-size: 15px;
+    font-weight: 400;
+    outline: none;
+}
+
+/* .top .searchBox i {
+    position: relative;
+    left: 80px;
+    font-size: 22px;
+    z-index: 10;
+    top: 8%;
+    transform: translateY(-50%);
+    color: var(--text-color);
+} */
+
+.top .toDo {
+    font-size: 26px;
+    color: var(--text-color);
+    cursor: pointer;
+
+}
+
+.top .notify {
+    font-size: 26px;
+    color: var(--text-color);
+    cursor: pointer;
+
+}
+
+ .top .profile {
+    color: var(--text-color);
+    cursor: pointer;
+
+}
+
+
+.top .dropdown {
+    float: right;
+    overflow: hidden;
+}
+
+
+.dropdown .dropbtn {
+    font-size: 28px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    color: white;
+    padding: 6px 8px;
+    background-color: inherit;
+    margin: 0;
+    border-radius: 10px;
+}
+
+
+.dropdown:hover .dropbtn {
+    background-color: var(--secondary-color);
+}
+
+
+
+.dropDownPContent {
+    display: none;
+    position: absolute;
+    right: 3%;
+    background-color: var(--panel-color);
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropDownPContent a {
+    float: none;
+    color: var(--text-color);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropDownPContent a:hover {
+    background-color: var(--secondary-color);
+}
+
+.dropdown:hover .dropDownPContent {
+    display: block;
+}

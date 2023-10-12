@@ -1,0 +1,62 @@
+
+.popup{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100vh;
+    background-color:rgba(1,1,1,0.4);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index: 12;
+
+}
+
+.popup-inner{
+    position:relative;
+    padding:32px;
+    width:100%;
+    max-width:640px;
+    background-color:var(--panel-color)
+
+}
+.popup-inner h5{
+    color: var(--text-color);
+    /* display: inline-block; */
+    float: left;
+    clear: left;
+    text-transform: capitalize;
+    padding-right: 8px;
+}
+
+.popup-inner p {
+    color: var(--text-color);
+    /* display: inline-block; */
+    float: left;
+    /* clear: both; */
+}
+.close-btn{
+    position:absolute;
+    top:16px;
+    right:16px;
+     
+    height: 45px;
+    width: 100px;
+    float: right;
+    clear: both;
+    /* border: 1px solid black */
+    background-color: var(--darker-color);
+}
+
+.print-btn {
+   
+    position: absolute;
+     top: 16px;
+    right: 130px;
+    height: 45px;
+    width: 100px; 
+    float: right;
+    clear: both; 
+    /* border: 1px solid black */
+}

@@ -51,8 +51,8 @@ const createAdmin=async (req,res)=>{
 const idTagValue= previousId!==null? `ADM${1000+previousId}`:`ADM${1000}`
 const fullIdentification=idTagValue+" "+fullName
 const emailSplited=email.split("@")
-
 const username=emailSplited[0]
+
 Mailer(email)
     admin.create({
         

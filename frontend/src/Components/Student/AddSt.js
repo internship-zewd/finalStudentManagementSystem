@@ -51,7 +51,7 @@ function AddSt () {
 })}
 
 const handleCourse=(e)=>{
-    setCourse(e)
+    setCourseFetched(e)
     getClass(e)
 
 }
@@ -177,12 +177,13 @@ const handleCourse=(e)=>{
                                 <div className="input-box">
 
                                     <span className="details">Course</span>
-                                    <option value={null} selected='selected'>Select Course</option>
+                                   
                                     <select required onChange={(e)=>{handleCourse(e.target.value)}} name="course">
+                                    <option value={null} selected='selected'>Select Course</option>
                                         {
                                         courseFetched.map((cors)=>(
 
-                                            <option value={cors.id}>{cors.name}</option>
+                                            <option value={cors.id}>{cors.course_name}</option>
 
                                         )
                                    

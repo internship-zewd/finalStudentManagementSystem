@@ -26,6 +26,9 @@ import AllCoDashboard from './Components/Course/AllDash';
 import AttendanceDashboard from './Components/Report/AttendanceDash';
 import ReportDashboard from './Components/Report/ReportDash';
 import NewMDashboard from './Components/Message/MessageDash';
+import AddRemindDashboard from "./Components/To-Do/AddRemindDashboard";
+import ManageRemindDashboard from "./Components/To-Do/ArchiveRemindDashboard";
+import ArchiveRemindDashboard from './Components/To-Do/ArchiveRemindDashboard';
 
 
 function App() {
@@ -81,7 +84,21 @@ function App() {
         <Route
           path="/Course/AllCourse"
           element={localStorage.getItem("access-token") !== null && localStorage.getItem("role") === "Admin" ? <AllCoDashboard /> : <Navigate to="/" />}
-        />
+      />
+      <Route
+          path="/To-do/AddRemainder"
+          element={localStorage.getItem("access-token") !== null && localStorage.getItem("role") === "Admin" ? <AddRemindDashboard/> : <Navigate to="/" />}
+      />
+      <Route
+          path="/To-do/Manage"
+          element={localStorage.getItem("access-token") !== null && localStorage.getItem("role") === "Admin" ? <ManageRemindDashboard/> : <Navigate to="/" />}
+      />
+      <Route
+          path="/To-do/Archive"
+          element={localStorage.getItem("access-token") !== null && localStorage.getItem("role") === "Admin" ? <ArchiveRemindDashboard/> : <Navigate to="/" />}
+      />
+
+      
         <Route
           path="/Attendance/TakeAttendance"
           element={localStorage.getItem("access-token") !== null && localStorage.getItem("role") === "Admin" ? <AttendanceDashboard /> : <Navigate to="/" />}

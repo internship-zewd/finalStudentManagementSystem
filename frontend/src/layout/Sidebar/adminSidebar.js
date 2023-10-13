@@ -56,27 +56,13 @@ export const adminSidebar = [
           }
       ]
   },
-  {
-      name:"Project", 
-      to:"", 
-      iconClassName:"uil uil-rocket",
-      subMenus:[
-          {
-            name:"Add Project", to:"/Project/AddProject"
-          },
-          {
-            name:"All Projects", to:"/Project/AllProject"
-          }
-      ]
-  },
+
   {
       name:"Report", 
       to:"", 
       iconClassName:"uil uil-receipt-alt",
       subMenus:[
-          {
-            name:"Financial Report", to:"/Report/Financial"
-          },
+        
           {
             name:"Attendance Report", to:"/Report/Attendance"
           },

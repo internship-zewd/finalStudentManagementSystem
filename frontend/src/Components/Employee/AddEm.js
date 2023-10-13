@@ -14,11 +14,8 @@ function  AddEm () {
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [salary, setSalary] = useState('');
-    const [date, setDate] = useState('');
-    const [course, setCourse] = useState("");
     const [errors,setErrors]=useState({});
     const [password,setPassword]=useState('');
-    const [courseInactive,setCourseInactive]=useState(true)
 
 
 
@@ -86,10 +83,10 @@ function  AddEm () {
             alert('Employee Added successfully!')
         }
         if(Object.keys(validationErrors).length===0){
-            console.log(firstName+middleName+lastName+email+password+phone+salary+date+course)
+            console.log(firstName+middleName+lastName+email+password+phone+salary)
 
         return await axios
-        .post(`http://localhost:8081/${employeeType}/create`,{firstName,middleName,lastName,email,password,phone,salary,date,course})
+        .post(`http://localhost:8081/${employeeType}/create`,{firstName,middleName,lastName,email,password,phone,salary})
         .then((res)=>{console.log(res)})
         .catch((err)=>{
             if(err){

@@ -24,9 +24,6 @@ import AddStDashboard from './Components/Student/AddDash';
 import AddCoDashboard from './Components/Course/AddDash';
 import AllCoDashboard from './Components/Course/AllDash';
 import AttendanceDashboard from './Components/Report/AttendanceDash';
-import AddPrDashboard from './Components/Project/AddDash';
-import AllPrDashboard from './Components/Project/AllDash';
-import FinancialDashboard from './Components/Report/FinancialDash';
 import ReportDashboard from './Components/Report/ReportDash';
 import NewMDashboard from './Components/Message/MessageDash';
 import ArchiveDashboard from './Components/Message/ArchiveDash';
@@ -46,6 +43,7 @@ function App() {
   
   return (
     <Router>
+      {console.log(isLoggedIn)}
       <h1>{console.log(isLoggedIn)}</h1>
       <Routes>
         <Route path="/" element={<SignIn2 />} />
@@ -89,18 +87,8 @@ function App() {
           path="/Attendance/TakeAttendance"
           element={localStorage.getItem("access-token") !== null && localStorage.getItem("role") === "Admin" ? <AttendanceDashboard /> : <Navigate to="/" />}
         />
-        <Route
-          path="/Project/AddProject"
-          element={localStorage.getItem("access-token") !== null && localStorage.getItem("role") === "Admin" ? <AddPrDashboard /> : <Navigate to="/" />}
-        />
-        <Route
-          path="/Project/AllProject"
-          element={localStorage.getItem("access-token") !== null && localStorage.getItem("role") === "Admin" ? <AllPrDashboard /> : <Navigate to="/" />}
-        />
-        <Route
-          path="/Report/Financial"
-          element={localStorage.getItem("access-token") !== null && localStorage.getItem("role") === "Admin" ? <FinancialDashboard /> : <Navigate to="/" />}
-        />
+      
+       
         <Route
           path="/Report/Attendance"
           element={localStorage.getItem("access-token") !== null && localStorage.getItem("role") === "Admin" ? <AttendanceDashboard /> : <Navigate to="/" />}

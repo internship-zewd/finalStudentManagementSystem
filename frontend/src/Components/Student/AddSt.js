@@ -40,7 +40,7 @@ function AddSt () {
     const getClass=async(id)=>{
         console.log("Im in here")
         console.log(id)
-        await axios.get(`http://localhost:8081/classs/getByCourse/${id}`)
+        await axios.get(`http://localhost:8081/class_roomgetByCourse/${id}`)
         .then((res)=>{
             setClassFetched(res.data)
         console.log(res.data)

@@ -28,7 +28,7 @@ function AllSt() {
 
     const getClass=async()=>{
     
-        await axios.get(`http://localhost:8081/classs/getAll`)
+        await axios.get(`http://localhost:8081/class_room/getAll`)
         .then((res)=>{console.log(res)})
         .catch((err)=>{if(err){console.log(err)}})
 

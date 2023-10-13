@@ -13,6 +13,7 @@ const fetchSpecificClass = async (req, res) => {
             },
             attributes: ['id']
         })
+        console.log(instId)
         const specificClass= await class_room.findAll({
             where: {
                 instructor_id: instId.id

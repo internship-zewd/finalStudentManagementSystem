@@ -42,7 +42,7 @@ export const instructorSidebar = [
     subMenus: [
       {
         name: "Assessment Form",
-        to: "/Assessment/Assessment",
+        to: "/Assessment/AssessmentForm",
       },
     ],
   },

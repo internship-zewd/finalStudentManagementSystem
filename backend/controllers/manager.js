@@ -62,13 +62,17 @@ const createManager=async (req,res)=>{
     const idTag=previousId!==null?`MAN${1000+previousId}`:`MAN${1000}`
     const fullName=firstName+" "+middleName+" "+lastName
     const fullIdentification=idTag+" "+fullName
+    const emailSplited=email.split("@")
+    const username=emailSplited[0]
+   
 
 
     
     manager.create({
 
         id_tag:idTag,
-        full_name:fullName,
+        full_name:fullName,  
+        username:username,
         full_identification:fullIdentification,
         email:email,
         password:password,
@@ -87,7 +91,7 @@ const createManager=async (req,res)=>{
 }
 
 const updateManager=async (req,res)=>{
-    const {firstName,middleName,lastName,email,password,phone,salary,fullIdentification}=req.body;
+    const {firstName,middleName,lastName,email,password,phone,salary,fullIdentification,username}=req.body;
     const identification=fullIdentification.split(" ")
     const fullName=firstName+" "+middleName+" "+lastName
     const full_identification=identification[0]+" "+fullName
@@ -100,6 +104,7 @@ const updateManager=async (req,res)=>{
             full_name:fullName,
             full_identification:full_identification,
             email:email,
+            username:username,
             password:password,
             phone:phone,
             salary:salary,

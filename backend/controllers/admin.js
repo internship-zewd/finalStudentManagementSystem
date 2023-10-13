@@ -50,11 +50,15 @@ const createAdmin=async (req,res)=>{
     const previousId= await admin.max('id')
 const idTagValue= previousId!==null? `ADM${1000+previousId}`:`ADM${1000}`
 const fullIdentification=idTagValue+" "+fullName
+const emailSplited=email.split("@")
+
+const username=emailSplited[0]
 Mailer(email)
     admin.create({
         
 
         id_tag:idTagValue,
+        username:username,
         full_name:fullName,
         full_identification:fullIdentification,
         email:email,
@@ -76,10 +80,11 @@ Mailer(email)
 
 const updateAdmin=async(req,res)=>{
     console.log("im in admin put")
-    const {firstName,middleName,lastName,email,password,phone,salary,fullIdentification}=req.body;
+    const {firstName,middleName,lastName,email,password,phone,salary,fullIdentification,username}=req.body;
     const identification=fullIdentification.split(" ")
     const fullName=firstName+" "+middleName+" "+lastName
     const full_identification=identification[0]+" "+fullName
+
 
     await admin.update(
         {     
@@ -90,6 +95,7 @@ const updateAdmin=async(req,res)=>{
             password:password,
             phone:phone,
             salary:salary,
+            username:username,
         
         },
 

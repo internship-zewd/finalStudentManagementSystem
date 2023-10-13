@@ -22,6 +22,7 @@ export const UpdatePopup=(props)=>{
     const _phone=updateProp.phone
     const _salary=updateProp.salary
     const full_identification=updateProp.full_identification
+    const _username=updateProp.username
 
 
 
@@ -35,6 +36,7 @@ export const UpdatePopup=(props)=>{
     const [salary,setSalary]=useState("");
     const [errors,setErrors]=useState({})
     const [fullIdentification,setFullIdentification]=useState("")
+    const [username,setUsername]=useState("")
     
 
     useEffect(()=>{
@@ -47,8 +49,9 @@ export const UpdatePopup=(props)=>{
         setPhone(_phone)
         setSalary(_salary)
         setFullIdentification(full_identification)
+        setUsername(_username)
 
-    },[employee_type,first_name,middle_name,last_name,_email,_phone,_salary,full_identification,_password])
+    },[employee_type,first_name,middle_name,last_name,_email,_phone,_salary,full_identification,_password,_username])
    
 // console.log(updateProp.id)
 
@@ -80,7 +83,7 @@ console.log(email+_email)
         }
         else{
             console.log(employeeType)
-         await axios.post(`http://localhost:8081/${employeeType}/create`,{firstName,middleName,lastName,email,password,phone,salary} )
+         await axios.post(`http://localhost:8081/${employeeType}/create`,{firstName,middleName,lastName,email,password,phone,salary,username} )
     .then((res)=>{
 
         console.log(res.data)

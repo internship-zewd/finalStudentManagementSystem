@@ -62,6 +62,9 @@ const createInstructor=async (req,res)=>{
     const idTag=previousId!==null?`INS${1000+previousId}`:`INS${1000}`
     const fullName=firstName+" "+middleName+" "+lastName
     const fullIdentification=idTag+" "+fullName
+    const emailSplited=email.split("@")
+const username=emailSplited[0]
+
        
     instructor.create({
 
@@ -72,6 +75,7 @@ const createInstructor=async (req,res)=>{
         password:password,
         phone:phone,
         salary:salary,
+        username:username,
 
     })
     .then(res.send()
@@ -86,7 +90,7 @@ const createInstructor=async (req,res)=>{
 }
 
 const updateInstructor=async (req,res)=>{
-    const {firstName,middleName,lastName,email,password,phone,salary,fullIdentification}=req.body;
+    const {firstName,middleName,lastName,email,password,phone,salary,fullIdentification,username}=req.body;
     const identification=fullIdentification.split(" ")
     const fullName=firstName+" "+middleName+" "+lastName
     const full_identification=identification[0]+" "+fullName
@@ -100,6 +104,7 @@ const updateInstructor=async (req,res)=>{
         {
 
         full_name:fullName,
+        username:username,
         full_identification:full_identification,
         email:email,
         password:password,

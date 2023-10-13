@@ -62,6 +62,9 @@ const createAccountant=async (req,res)=>{
     const idTag=previousId!==null?`ACC${1000+previousId}`:`ACC${1000}`
     const fullName=firstName+" "+middleName+" "+lastName
     const fullIdentification=idTag+" "+fullName
+    const emailSplited=email.split("@")
+    const username=emailSplited[0]
+     
 
 
     
@@ -69,6 +72,7 @@ const createAccountant=async (req,res)=>{
 
         id_tag:idTag,
         full_name:fullName,
+        username:username,
         full_identification:fullIdentification,
         email:email,
         password:password,
@@ -87,7 +91,7 @@ const createAccountant=async (req,res)=>{
 }
 
 const updateAccountant=async (req,res)=>{
-    const {firstName,middleName,lastName,email,password,phone,salary,fullIdentification}=req.body;
+    const {firstName,middleName,lastName,email,password,phone,salary,fullIdentification,username}=req.body;
     const identification=fullIdentification.split(" ")
     const fullName=firstName+" "+middleName+" "+lastName
     const full_identification=identification[0]+" "+fullName
@@ -101,6 +105,7 @@ const updateAccountant=async (req,res)=>{
             email:email,
             password:password,
             phone:phone,
+            username:username,
             salary:salary,
     },
 

@@ -1,18 +1,34 @@
 import React from 'react'
 // import './DashContent.css'
-
+import { useState, useEffect } from "react";
+import axios from "axios";
 import {
  BarChart, Bar, Cell, XAxis, YAxis, 
  CartesianGrid, Tooltip, 
  Legend, ResponsiveContainer, 
  LineChart, Line } 
  from 'recharts';
- import {useState, useEffect} from 'react'
- import axios from 'axios';
-
-
+ 
+ import AccDashContent from './AccountantDashContent';
+ import AdminDashContent from './AdminDashContent';
+import ManDashContent from './ManagerDashContent';
+import InsDashContent from './InstructorDashContent';
 
 function DashContent() {
+
+  const role = localStorage.getItem("role")
+  const renderDash = () => {
+    if (role === "Admin") {
+      return <AdminDashContent />;
+    } else if (role === "Manager") {
+      return <ManDashContent />;
+    } else if (role === "Instructor") {
+      return <InsDashContent />;
+    }else if (role === "Accountant") {
+      return <AccDashContent />;
+    }
+  }
+
     const data = [
         {
           name: 'Student',
@@ -75,35 +91,7 @@ await axios.get(`http://localhost:8081/instructor`)
 
 
 
-        const [courseCount, setcourseCount] = useState(0);
-
-    useEffect(() => {
-         getcourseCount();
-  }, []);
-
-const getcourseCount=async()=>{
-      await axios.get('http://localhost:8081/course/count') 
-      .then(res => {
-         console.log('Response data:', res.data);
        
-         const count = parseInt(res.data);
-         if (!isNaN(count)) {
-              setcourseCount(count);
-             }  else {
-          console.error('Invalid response data:', res.data.length);
-        }
-      })
-      .catch(error => {
-        console.error('Error occurred while fetching the number of course:', error);
-      });
-
-    }
-
-
- 
-      
-
-
 
   return (
    <div className="dashContent">
@@ -113,7 +101,7 @@ const getcourseCount=async()=>{
                         <span className="text">Dashboard</span>
                     </div>
            <div className="container">
-                    <div className="boxes">
+                    {/* <div className="boxes">
                         <div className="box box-1">
                             <i className="uil uil-graduation-cap"></i>
                             <span className="text">Total Students</span>
@@ -131,7 +119,9 @@ const getcourseCount=async()=>{
                             <span className="text">Total Employees</span>
                             <span className="number">35</span>
                         </div>
-                    </div>
+                    </div> */}
+
+                    <div>{renderDash()}</div>
                 
 
 

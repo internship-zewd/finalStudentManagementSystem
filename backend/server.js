@@ -43,6 +43,11 @@ app.use("/auth", authRouter);
 var createFirst = require("./routes/createTestAll");
 app.use("/create", createFirst);
 
+var assessmentRouter = require("./routes/assessment");
+app.use("/assessment", assessmentRouter);
+var markListRouter = require("./routes/mark_list");
+app.use("/markList", markListRouter);
+
 
 db.sequelize.sync({alter:true}).then((req)=>{
     app.listen(PORT,()=>{

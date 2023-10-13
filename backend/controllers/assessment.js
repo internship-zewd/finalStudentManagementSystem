@@ -3,6 +3,7 @@ const {class_room} = require('../models')
 const { student } = require('../models')
 
 const fetchSpecificClass = async (req, res) => {
+  console.log("we're in here whooooo")
     const instUsername = req.body.username
 
     try {
@@ -21,7 +22,7 @@ const fetchSpecificClass = async (req, res) => {
             attributes: ['full_identification']
         })
 
-        res.json(specificClass)
+        res.send(specificClass)
 
     } catch (error) {
         console.log("Error fetching data", error, 500);        

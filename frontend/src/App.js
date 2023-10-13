@@ -155,7 +155,6 @@ function App() {
       />
 
       
-        
         <Route
           path="/Attendance/TakeAttendance"
           element={
@@ -171,7 +170,7 @@ function App() {
           path="/Assessment/AssessmentForm"
           element={
             localStorage.getItem("access-token") !== null &&
-            localStorage.getItem("role") === "Admin" ? (
+            localStorage.getItem("role") === "Instructor" ? (
               <AssessmentDashboard />
             ) : (
               <Navigate to="/" />

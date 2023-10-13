@@ -14,12 +14,13 @@ function AssessmentForm() {
   const [outOf, setOutOf] = useState("");
 
   const username = localStorage.getItem("username");
+  const accessToken= localStorage.getItem("access-token");
+  console.log(username)
 
-  useEffect(() => {
-    getClass() }, []);
+  useEffect(() => { getClass() }, [username]);
     const getClass=async()=>{
       await axios
-        .post("http://localhost:8081/assessment/specificClass", { username })
+        .post("http://localhost:8081/assessment/specificClass", { username,accessToken })
         .then((res) => {
           if (res.data.success === false) {
             console.log("error fetching data");

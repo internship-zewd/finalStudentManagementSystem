@@ -13,7 +13,7 @@ export const adminSidebar = [
             name:"Add Student", to:"/Student/AddStudent"
           },
           {
-           name:"All Students", to:"/Student/AllStudents"
+           name:"All Students", to:"/Student/AllStudent"
           }
       ]
   },
@@ -26,7 +26,7 @@ export const adminSidebar = [
             name:"Add Employee", to:"/Employee/AddEmployee"
           },
           {
-           name:"All Employees", to:"/Employee/AllEmployees"
+           name:"All Employees", to:"/Employee/AllEmployee"
           }
       ]
   },
@@ -39,7 +39,7 @@ export const adminSidebar = [
             name:"Add Course", to:"/Course/AddCourse"
           },
           {
-            name:"All Courses", to:"/Course/AllCourses"
+            name:"All Courses", to:"/Course/AllCourse"
           }
       ]
   },
@@ -65,7 +65,7 @@ export const adminSidebar = [
             name:"Add Project", to:"/Project/AddProject"
           },
           {
-            name:"All Projects", to:"/Project/AllProjects"
+            name:"All Projects", to:"/Project/AllProject"
           }
       ]
   },

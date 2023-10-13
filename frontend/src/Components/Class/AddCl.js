@@ -56,7 +56,7 @@ function AddCl() {
     }
     if (Object.keys(validationErrors).length === 0) {
       axios
-        .post("http://localhost:8081/classs/create", {
+        .post("http://localhost:8081/class_room/create", {
           className,
           selectedInstructor,
           selectedCourse,

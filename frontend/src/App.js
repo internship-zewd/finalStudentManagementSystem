@@ -13,7 +13,7 @@
 // export default App;
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import SignIn2 from './js/signIn2'
+import SignIn2 from "./Components/Signin/signIn2"
 import DashDashboard from './Components/DashContent/DashDash';
 import AddEmDashboard from './Components/Employee/AddDash';
 import AllEmDashboard from './Components/Employee/AllDash';

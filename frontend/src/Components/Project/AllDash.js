@@ -1,8 +1,8 @@
 import React from 'react';
 import { useState } from 'react';
-import './App.css';
+import '../../App.css';
 import Sidebar from "../../layout/Sidebar/Sidebar"
-import ContentTop from './Components/ContentTop/ContentTop';
+import ContentTop from '../ContentTop/ContentTop';
 import AllPr from './AllPr';
 
 

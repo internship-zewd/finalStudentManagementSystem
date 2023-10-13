@@ -4,10 +4,10 @@ import './AddEm.css'
 import axios from 'axios';
 import {Link} from "react-router-dom";
 import {Filter} from './Filter'
-import { SpecificMessage } from './SpecificMessage';
+import { Table } from 'react-bootstrap';
+
 function NewM() {
 
-    
     const [showAll,setShowAll]=useState(false)
     const [showSpecific,setShowSpecific]=useState(false)
     const [members,setMembers]=useState([])
@@ -48,11 +48,12 @@ function NewM() {
         console.log(emails)
         console.log(checked)
         let addresses=[]
+        setChecked(e)
         if (e===true){
-            setChecked(true)
+            
             setEmails((preValue)=>[...preValue,email])
         }else{
-            setChecked(false)
+
             addresses=emails.filter((item)=>(item !== email))
             console.log(addresses)
             setEmails(addresses)
@@ -142,21 +143,30 @@ function NewM() {
                 </div>
 
 
-                <div className="activity">
-                    <div className="title">
-                        <span className="textActivities">Recent Activities</span>
-                    </div>
-
-                    <div className="activityData">
+              <div className='container'>
+                <div className='content'>
+                    <div className='user-details'>
+                        <div className='input-box'>
+                            <div className='gender-details'>
+                          
                         <select onChange={(e)=>{setType(e.target.value)}}>
 
-                            <option value="">select type</option>
+                            <option value="">Send message to</option>
                             <option value="all">All</option>
                             <option value="specific">Specific</option>
 
                         </select>
+                              
+                        </div>
+                        </div>
+                    </div>
+                    <br/>
                         {showAll &&<div>
-                            <form onSubmit={handleSubmitAll}>
+                            <div className='user-details'>
+                       
+                            <form onSubmit={handleSubmitAll} encType='multipart/form-data'>
+                            <div className='input-box'>
+                            <div className='gender-details'>
 
                             <select name="messageType" onChange={(e)=>{handleChange(e)}} required>
                                 <option value="" selected="selected">Select type</option>
@@ -167,27 +177,39 @@ function NewM() {
                                 <option value="allStudents">All Students</option>
                                 <option value="allManagers">All Managers</option>
                                 <option value="allAccountants">All Accountants</option>
-                            </select><br/>
-                            <label for="title">Title </label>
+                            </select></div></div><br/>
+                            <div className='input-box'>
+                            
+                            <span className='details'>Title</span>
                             <input id="title" type="text" name="title" placeholder="subject of the message..." required onChange={(e)=>{handleChange(e)}} /><br/>
-
-                            <textarea rows="10" cols="80" placeholder="enter the message...." required onChange={(e)=>{handleChange(e)}} name="message"></textarea><br/>
-                            <label for="attach">Attachment </label>
+                            </div><br/>
+                            <div className='input-box'>
+                            <textarea rows="10" cols="80" placeholder="Enter the message...." required onChange={(e)=>{handleChange(e)}} name="message"></textarea><br/>
+                           </div>
+                           <br/>
+                           <div className='input-box'>
+                            <div className='gender-details'>
+                                <span className='details'>Attachment</span>
                             <input id="attach" type="file" name="attachment" placeholder=".pdf,.exe,.txt,..." onChange={(e)=>{handleAttachment(e)}} />
-
-                            <button type="submit" onSubmit={(e)=>handleSubmitAll(e)}>Send</button>
+                               </div></div>
+                               <br/>
+                            <button type="submit" className='btn btn-warning button' onSubmit={(e)=>handleSubmitAll(e)}>Send</button>
                             </form>
+                            </div>
                         </div>
                         }
                         {showSpecific && <div>
                             
                    <Filter members={members} setMembers={setMembers} dataInitial={dataInitial}/> 
-            
-        
-                            <input type="text" placeholder="Search Employees" onChange={(e) => { setSearch(e.target.value) }} name="search" value={search} />
-                           <button><Link to={{pathname:"/Message/Specific",state:{emails}}} >Send a message</Link> </button>           
-
-                            <table>
+                   <br/>
+                         
+                         
+                        <div className='user-deatils'>
+                            <div className='input-box'>
+                           <input type="text" placeholder="Search Employees" onChange={(e) => { setSearch(e.target.value) }} name="search" value={search} />
+                           <button  className='btn btn-warning button'><Link  style={{ textDecoration: 'none' }}to={{pathname:"/Message/Specific",state:{emails}}} >Send a message</Link> </button>           
+                         </div></div>
+                            <Table striped bordered hover>
 
                                 <thead>
                                     <tr>
@@ -204,10 +226,13 @@ function NewM() {
 
 })
 .map((item)=> (
+    
     <tbody>
     
 
     <tr key={item.id}>
+    
+    
         {console.log(members)}
         <td>{item.full_identification}</td>
         <td>{item.member_type}</td>
@@ -216,7 +241,7 @@ function NewM() {
         </tr>
         </tbody>
                         
-))}</table> </div> }
+))}</Table> </div> }
                     
                         
                         

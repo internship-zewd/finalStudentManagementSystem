@@ -26,7 +26,6 @@ import AllCoDashboard from './Components/Course/AllDash';
 import AttendanceDashboard from './Components/Report/AttendanceDash';
 import ReportDashboard from './Components/Report/ReportDash';
 import NewMDashboard from './Components/Message/MessageDash';
-import ArchiveDashboard from './Components/Message/ArchiveDash';
 
 
 function App() {
@@ -101,10 +100,7 @@ function App() {
           path="/Message/NewMessage"
           element={localStorage.getItem("access-token") !== null && localStorage.getItem("role") === "Admin" ? <NewMDashboard /> : <Navigate to="/" />}
         />
-        <Route
-          path="/Message/Archive"
-          element={localStorage.getItem("access-token") !== null && localStorage.getItem("role") === "Admin" ? <ArchiveDashboard /> : <Navigate to="/" />}
-        />
+    
       </Routes>
     </Router>
   );

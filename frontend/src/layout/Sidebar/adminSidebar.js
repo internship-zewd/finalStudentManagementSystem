@@ -79,9 +79,6 @@ export const adminSidebar = [
           {
             name:"New Message", to:"/Message/NewMessage"
           },
-          {
-            name:"Archives", to:"/Message/Archive"
-          }
       ]
   },
 ]

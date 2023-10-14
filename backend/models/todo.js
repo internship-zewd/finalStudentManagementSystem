@@ -37,8 +37,17 @@ module.exports=(sequelize,DataTypes)=>{
             validate:{
                 notEmpty:true
             },
-
         },
+        
+           due:{
+                type:DataTypes.DATE,
+                allowNull:false,
+                validate:{
+                    notEmpty:true
+                },
+    
+            },
+        
         notify:{
             type:DataTypes.BOOLEAN,
             allowNull:false,

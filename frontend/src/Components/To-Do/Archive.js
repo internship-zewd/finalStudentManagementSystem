@@ -20,7 +20,7 @@ function Archive() {
 
     return await axios.get(`http://localhost:8081/todo/getOne/${id}`)
     .then((res)=>{
-
+       
         const viewData=res.data
         console.log(viewData)
         setReminderinfo(viewData)      

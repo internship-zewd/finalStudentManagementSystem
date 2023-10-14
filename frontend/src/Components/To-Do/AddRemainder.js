@@ -11,7 +11,8 @@ function AddRemainder() {
     date:"",
     time:"",
     description:"",
-    notify:true
+    notify:true,
+    days:0
 });
 
 
@@ -129,7 +130,12 @@ e.preventDefault();
                                     <div className="errors">{errors.description}<br/></div>
                                 </div>
 
-                               
+                                <div className="input-box">
+                                    <span className="details">Remind me before: </span>
+                                    <input type="number" placeholder="number of days" name="days" required onChange={(e)=>{handleChange(e)}} />
+                                    <div className="errors">{errors.days}<br/></div>
+                                </div>
+                                                                        
                                 <label>
                                      <input style={{ width: 30}}
                                          name="notify"
@@ -139,7 +145,7 @@ e.preventDefault();
                                             />
                                           Notify me
                                           </label>
-                                         
+                                
 
                                 <button className="btn btn-warning" type="submit" onChange={()=>{handleSubmit()}}>Submit</button>
 

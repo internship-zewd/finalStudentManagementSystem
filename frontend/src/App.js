@@ -27,7 +27,7 @@ import AttendanceDashboard from './Components/Report/AttendanceDash';
 import ReportDashboard from './Components/Report/ReportDash';
 import NewMDashboard from './Components/Message/MessageDash';
 import AddRemindDashboard from "./Components/To-Do/AddRemindDashboard";
-import ManageRemindDashboard from "./Components/To-Do/ArchiveRemindDashboard";
+import ManageRemindDashboard from "./Components/To-Do/ManageRemindDashboard";
 import ArchiveRemindDashboard from './Components/To-Do/ArchiveRemindDashboard';
 import AssessmentDashboard from './Components/Assessment/AssessmentDash';
 import MarkDashboard from './Components/MarkList/MarkDash';
@@ -142,16 +142,16 @@ function App() {
           element={localStorage.getItem("access-token") !== null && localStorage.getItem("role") === "Admin" ? <AllCoDashboard /> : <Navigate to="/" />}
       />
       <Route
-          path="/To-do/AddRemainder"
-          element={localStorage.getItem("access-token") !== null && localStorage.getItem("role") === "Admin" ? <AddRemindDashboard/> : <Navigate to="/" />}
+          path="/To-Do/AddRemainder"
+          element={localStorage.getItem("access-token") !== null && localStorage.getItem("role") === "Admin"||"Instructor" ? <AddRemindDashboard/> : <Navigate to="/" />}
       />
       <Route
-          path="/To-do/Manage"
-          element={localStorage.getItem("access-token") !== null && localStorage.getItem("role") === "Admin" ? <ManageRemindDashboard/> : <Navigate to="/" />}
+          path="/To-Do/Manage"
+          element={localStorage.getItem("access-token") !== null && localStorage.getItem("role") === "Admin"||"Instructor" ? <ManageRemindDashboard/> : <Navigate to="/" />}
       />
       <Route
-          path="/To-do/Archive"
-          element={localStorage.getItem("access-token") !== null && localStorage.getItem("role") === "Admin" ? <ArchiveRemindDashboard/> : <Navigate to="/" />}
+          path="/To-Do/Archive"
+          element={localStorage.getItem("access-token") !== null && localStorage.getItem("role") === "Admin"||"Instructor" ? <ArchiveRemindDashboard/> : <Navigate to="/" />}
       />
 
       

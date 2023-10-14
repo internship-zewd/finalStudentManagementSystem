@@ -1,6 +1,6 @@
 import React from 'react'
 import './ContentTop.css'
-
+import {Link} from "react-router-dom"
 
 
 function ContentTop({click}) {
@@ -26,8 +26,10 @@ function ContentTop({click}) {
                            <a href="#"><i className="uil uil-signout"></i>Logout</a>
                         </div>
                 </div>
-                <i className="uil uil-bell notify"></i>
-                <i className="uil uil-schedule toDo"></i>
+                
+                <button><Link  style={{ textDecoration: 'none' }}to={{pathname:"../To-Do/Notification"}} ><i className="uil uil-bell notify" ></i></Link></button>
+                {/* {console.log(localStorage.getItem("access-token"))} */}
+                <button><Link  style={{ textDecoration: 'none' }}to={{pathname:"../To-Do/Archive"}} ><i className="uil uil-schedule toDo"></i></Link></button>
             </div>
   )
 }

@@ -8,6 +8,6 @@ router.put('/update/:id',updateReminder)
 router.get('/getOne/:id',getOneReminder)
 router.put('/updatePopup/:id',updateReminderPopup)
 router.delete('/delete/:id',deleteReminder)
-// router.get('/getDue',getDue)
+router.get('/getDue',getDue)
 
 module.exports=router

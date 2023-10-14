@@ -1,5 +1,6 @@
 const {todo}=require('../models')
 const moment=require('moment')
+const {Op}=require('sequelize')
 
 const createReminder=(req,res)=>{
 
@@ -102,12 +103,15 @@ const deleteReminder=(req,res)=>{
         }
     })}
 
-// const getDue=async()=>{
-//     todo.getAll({where:{due:DATE.now()}})
-//     .then(res.send())
-//     .catch((err)=>{if(err){console.log(err)}})
+const getDue=async(req,res)=>{
+    const now=new Date()
+    console.log(now)
 
-// }
+    todo.findAll({where:{due:{[Op.gte]:now,},status:"incomplete"}})
+    .then((reminders)=>{res.send(reminders)})
+    .catch((err)=>{if(err){console.log(err)}})
+
+}
 
 
 
@@ -118,5 +122,5 @@ module.exports={
     getOneReminder,
     updateReminderPopup,
     deleteReminder,
-    // getDue,
+    getDue,
 }

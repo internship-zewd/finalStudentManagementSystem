@@ -17,6 +17,7 @@ function DashDashboard() {
 const getNotification=async()=>{
   await axios.get(`http://localhost:8081/todo/getDue`)
   .then((res)=>{
+    
     console.log(res.data)
   })
   .catch((err)=>{

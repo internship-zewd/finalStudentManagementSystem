@@ -14,6 +14,8 @@ function Archive() {
   const [newTask, setNewTask] = useState('');
   const [reminderinfo, setReminderinfo] = useState({});
   const [buttonPopup, setButtonPopup] = useState(false);
+  const username=localStorage.getItem('username')
+  console.log(username)
 
 
   const handleView=async(id)=>{
@@ -27,7 +29,7 @@ function Archive() {
         setButtonPopup(true) })}
 
         const getTasks=async()=>{
-             await axios.get(`http://localhost:8081/todo/getAll`)
+             await axios.get(`http://localhost:8081/todo/getAll/${username}`)
                         .then((res)=>{
                   let completed=[]
                   let incomplete=[]

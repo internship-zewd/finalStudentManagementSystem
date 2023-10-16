@@ -1,14 +1,51 @@
 const {todo}=require('../models')
 const moment=require('moment')
 const {Op}=require('sequelize')
+const {admin, instructor, manager, accountant} = require('../models')
 
 const createReminder=(req,res)=>{
 
-    const {name,description,time,date,notify,days}= req.body.reminder;
+
+    const {name,description,time,date,notify,days,username, role}= req.body.reminder;
 //     const due=new Date(date)
 //     console.log(due.getDate())
 //    const dumb= due.setDate(due.getDate-days)
+console.log(req.body.reminder)
 const due=moment(date).subtract(days,'days').toDate();
+
+let userTag = null
+if (role === "Admin") {
+    userTag = admin.findOne({
+        where: {
+            username: username
+        },
+        attributes: ['id_tag']
+    })
+}
+if (role === "Instructor") {
+    userTag = instructor.findOne({
+        where: {
+            username: username
+        },
+        attributes: ['id_tag']
+    })
+}
+if (role === "Manager") {
+    userTag = manager.findOne({
+        where: {
+            username: username
+        },
+        attributes: ['id_tag']
+    })
+}
+if (role === "Accountant") {
+    userTag = accountant.findOne({
+        where: {
+            username: username
+        },
+        attributes: ['id_tag']
+    })
+}
 console.log(due)
 
     todo.create({
@@ -19,6 +56,7 @@ console.log(due)
         status:false,
         notify:notify,
         due:due,
+        user:userTag.id_tag
     })
     .then(
         res.send()
@@ -31,8 +69,9 @@ console.log(due)
 
 const getAllReminders=async(req,res)=>{
     console.log('im here')
+   const {username}=req.params
 
-    await todo.findAll()
+    await todo.findAll({where:{username:username}})
     .then((todos)=>{
         console.log(todos)
         res.send(todos)

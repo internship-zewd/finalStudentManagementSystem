@@ -14,6 +14,7 @@ export const UpdatePopup=(props)=>{
     let status= reminderProp.status
     let id = reminderProp.id
     let notify = reminderProp.notify
+    let due=reminderProp.due
     useEffect(()=>{
 
        
@@ -163,6 +164,11 @@ export const UpdatePopup=(props)=>{
                                         <option value={true}>Completed</option>
                                         <option value={false}>Incomplete</option>
                                     </select>
+                                </div>
+
+                                <div className="input-box">
+                                    <span className="details">Remind me before:</span>
+                                    <textarea type="text" rows="50" cols="50" placeholder="Days before the reminder..." name="description"  required defaultValue={due} onChange={(e)=>{handleChange(e)}} />
                                 </div>
                                
                                 <label>

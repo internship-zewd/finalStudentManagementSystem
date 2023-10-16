@@ -1,30 +1,25 @@
 import React from 'react';
-import { useState,useEffect } from 'react';
+import { useState } from 'react';
 import '../../App.css';
 import Sidebar from "../../layout/Sidebar/Sidebar"
 import ContentTop from '../ContentTop/ContentTop';
-import DashContent from './DashContent';
-import axios from 'axios';
-import {Notification} from "../To-Do/Notification"
+import ReportCard from './ReportCard';
 
 
-function DashDashboard() {
+function StudentReportDashboard() {
   const [sidebarClose, setSidebarClose] = useState(false);
-
-  
   const handleClick= () => {
     setSidebarClose(!sidebarClose);
   }
-
-
   return (
        <div className="full_content">
-        <section>                             
+        <section>
+                              
           
              <Sidebar sidebarClose={sidebarClose}  click={handleClick}/>
              <section className="dashboard">
                 <ContentTop click={handleClick}/>
-                 <DashContent />
+                 <ReportCard />
               </section>
              
         </section>
@@ -33,4 +28,4 @@ function DashDashboard() {
   )
 }
 
-export default DashDashboard
+export default StudentReportDashboard

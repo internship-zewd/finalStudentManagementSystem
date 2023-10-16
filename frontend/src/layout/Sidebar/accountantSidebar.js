@@ -3,7 +3,7 @@ export const accountantSidebar = [
     {
         name:"Dashboard", 
         iconClassName:"uil uil-estate",
-        to:"/"
+        to:"/dashboard"
     },
     {
         name:"Financial Report", 

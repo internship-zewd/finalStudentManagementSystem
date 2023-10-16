@@ -1,9 +1,7 @@
 const { admin } = require("../models");
 const { instructor } = require('../models');
 const { course } = require('../models')
-const { student } = require('../models')
 const { manager } = require('../models')
-const { classRoom } = require('../models')
 const { accountant } = require('../models');
 
 const createTestAll = async(req, res, next) => {
@@ -28,8 +26,8 @@ const createTestAll = async(req, res, next) => {
               full_name: adminName,
               id_tag: idTagValue,
               username: "testAdminUser",
-              email:"test@gmail.com",
               full_identification: fullAdmin,
+              email: "test@gmail.com",
               salary: 2000,
               phone: '+251939881190',
               password: 'testAdmin1'
@@ -41,7 +39,7 @@ const createTestAll = async(req, res, next) => {
           const rowCountInstructor = await instructor.count();
           if (rowCountInstructor === 0) {
             console.log("Table is empty");
-            const previousInstructorId = await instructor.max("id");
+            const previousInstructorId = await instructor.max("id");  0
       
             const idTagValue =
               previousInstructorId !== null
@@ -55,8 +53,8 @@ const createTestAll = async(req, res, next) => {
               full_name: instructorName,
               id_tag: idTagValue,
               username: "testInstructorUser",
-              email:"test@gmail.com",
               full_identification: fullInstructor,
+              email: "test@gmail.com",
               salary: 2000,
               phone: '+251939881190',
               password: 'testInstructor1'
@@ -64,79 +62,81 @@ const createTestAll = async(req, res, next) => {
             });
           }
 
-          // const managerName = "testManager"
-          // const rowCountManager = await manager.count();
-          // if (rowCountManager === 0) {
-          //   console.log("Table is empty");
-          //   const previousManagerId = await manager.max("id");
+          const managerName = "testManager"
+          const rowCountManager = await manager.count();
+          if (rowCountManager === 0) {
+            console.log("Table is empty");
+            const previousManagerId = await manager.max("id");
       
-          //   const idTagValue =
-          //     previousManagerId !== null
-          //       ? `MA${1000 + previousManagerId}`
-          //       : "MA1000";
+            const idTagValue =
+              previousManagerId !== null
+                ? `MA${1000 + previousManagerId}`
+                : "MA1000";
       
-          //   // Combine idTagValue and instructor name
-          //   const fullManager = `${idTagValue} ${managerName}`;
+            // Combine idTagValue and instructor name
+            const fullManager = `${idTagValue} ${managerName}`;
       
-          //   await manager.create({
-          //     name: managerName,
-          //     idTag: idTagValue,
-          //     username: "testManagerUser",
-          //     fullIdentification: fullManager,
-          //     salary: 2000,
-          //     phoneNumber: '+251939881190',
-          //     password: 'testManager1'
+            await manager.create({
+              full_name: managerName,
+              id_tag: idTagValue,
+              username: "testManagerUser",
+              full_identification: fullManager,
+              email: "test@gmail.com",
+              salary: 2000,
+              phone: '+251939881190',
+              password: 'testManager1'
       
-          //   });
-          // }
-          // const accountantName = "testAccountant"
-          // const rowCountAccountant = await accountant.count();
-          // if (rowCountAccountant === 0) {
-          //   console.log("Table is empty");
-          //   const previousAccountantId = await accountant.max("id");
+            });
+          }
+          const accountantName = "testAccountant"
+          const rowCountAccountant = await accountant.count();
+          if (rowCountAccountant === 0) {
+            console.log("Table is empty");
+            const previousAccountantId = await accountant.max("id");
       
-          //   const idTagValue =
-          //     previousAccountantId !== null
-          //       ? `ACT${1000 + previousAccountantId}`
-          //       : "ACT1000";
+            const idTagValue =
+              previousAccountantId !== null
+                ? `ACT${1000 + previousAccountantId}`
+                : "ACT1000";
       
-          //   // Combine idTagValue and instructor name
-          //   const fullAccountant = `${idTagValue} ${accountantName}`;
+            // Combine idTagValue and instructor name
+            const fullAccountant = `${idTagValue} ${accountantName}`;
       
-          //   await accountant.create({
-          //     name: accountantName,
-          //     idTag: idTagValue,
-          //     username: "testAccountantUser",
-          //     fullIdentification: fullAccountant,
-          //     salary: 2000,
-          //     phoneNumber: '+251939881190',
-          //     password: 'testAccountant1'
+            await accountant.create({
+              full_name: accountantName,
+              id_tag: idTagValue,
+              username: "testAccountantUser",
+              full_identification: fullAccountant,
+              email: "test@gmail.com",
+              salary: 2000,
+              phone: '+251939881190',
+              password: 'testAccountant1'
       
-          //   });
-          // }
-          // const courseName = "testCourse"
-          // const rowCountCourse = await course.count();
-          // if (rowCountCourse === 0) {
-          //   console.log("Table is empty");
-          //   const previousCourseId = await course.max("id");
+            });
+          }
+          const courseName = "testCourse"
+          const rowCountCourse = await course.count();
+          if (rowCountCourse === 0) {
+            console.log("Table is empty");
+            const previousCourseId = await course.max("id");
       
-          //   const idTagValue =
-          //     previousCourseId !== null
-          //       ? `COS${1000 + previousCourseId}`
-          //       : "COS1000";
+            const idTagValue =
+              previousCourseId !== null
+                ? `COS${1000 + previousCourseId}`
+                : "COS1000";
       
-          //   // Combine idTagValue and instructor name
-          //   const fullCourse = `${idTagValue} ${courseName}`;
+            // Combine idTagValue and instructor name
+            const fullCourse = `${idTagValue} ${courseName}`;
       
-          //   await course.create({
-          //     name: courseName,
-          //     idTag: idTagValue,
-          //     fullIdentification: fullCourse,
-          //     tuitionFee: 4000,
-          //     duration: '3 months',
+            await course.create({
+              course_name: courseName,
+              id_tag: idTagValue,
+              full_identification: fullCourse,
+              fee: 4000,
+              course_duration: '3 months',
       
-          //   });
-          // }
+            });
+          }
 
           // const studentName = "testStudent"
           // const rowCountStudent = await student.count();

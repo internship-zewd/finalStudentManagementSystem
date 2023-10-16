@@ -4,8 +4,12 @@ import  {useLocation} from 'react-router-dom'
 
 
 export const SpecificMessage=(props)=>{
-    const location=useLocation()
-    const emails=location.state.emails
+    const emails=props.emails
+    // const location=useLocation()
+    // const emails=location.state.emails
+    // console.log(emails)
+    // const emails=props.emails
+
 
     console.log("helowwwwwwww")
 
@@ -17,10 +21,17 @@ export const SpecificMessage=(props)=>{
 
     })
 
+    const formData=new FormData()
+
+    formData.append('to',emails)
+    formData.append('subject',messageInfo.title)
+    formData.append('text',messageInfo.message)
+    formData.append('file',attachment)
+
 
 
     const handleAttachment=(e)=>{
-        const file=e.target.files[0]
+        const file=e.target.files
         const reader=new FileReader()
         reader.onload = () => {
           const attachmentData = reader.result;
@@ -38,7 +49,7 @@ export const SpecificMessage=(props)=>{
 
     const handleSubmitSpecific=async(e)=>{
         e.preventDefault()
-        await axios.post(`http://localhost:8081/message/specific`,{emails,messageInfo,attachment})
+        await axios.post(`http://localhost:8081/message/specific`,formData,{headers:{'Content-Type':'multipart/form-data'},})
         .then((res)=>{console.log(res)
         alert("message sent successfully")})
         .catch((err)=>{if(err){console.log(err)
@@ -70,7 +81,7 @@ export const SpecificMessage=(props)=>{
                 <div className='content'>
                     <div className='user-details'>
                        
-             <form onSubmit={handleSubmitSpecific} encType='multipart/form-data'>
+             <form onSubmit={handleSubmitSpecific} >
 
              <div className='input-box'>
                             

@@ -2,7 +2,7 @@ export const managerSidebar = [
     {
         name: "Dashboard",
         iconClassName: "",
-        to: "/"
+        to: "/dashboard"
     },
     {
         name: "Employee",

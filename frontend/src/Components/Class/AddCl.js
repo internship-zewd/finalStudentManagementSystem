@@ -37,9 +37,10 @@ function AddCl() {
         "Class name should be less than 16 characters";
     }
 
-    if (!course.trim()) {
-      validationErrors.course = "Fill in Course";
-    } else if (course.length > 26) {
+    // if (!course.trim()) {
+    //   validationErrors.course = "Fill in Course";
+    // } 
+    else if (course.length > 26) {
       validationErrors.course = "course must not exceed 26 characters.";
     }
 
@@ -81,14 +82,13 @@ function AddCl() {
   const handleCourseChange = (e) => {
     setSelectedCourse(e.target.value);
     axios
-      .put("http://localhost:8081/course/update", {
-        selectedCourse,
-      })
+      .get("http://localhost:8081/instructor/getAll")
       .then((res) => {
         if (res.data.success === false) {
           console.log("No instructor assigned");
         } else {
           setInstructorList(res.data);
+          console.log(instructorList);
         }
       });
   };
@@ -155,13 +155,13 @@ function AddCl() {
                   onChange={handleInstructorChange}
                   name="course"
                 >
-                  <option value="">Select Course</option>
+                  <option value="">Select Instructor</option>
                   {instructorList.map((instructorName, index) => (
                     <option
                       key={index}
-                      value={instructorName.fullIdentification}
+                      value={instructorName.full_identification}
                     >
-                      {instructorName.fullIdentification}
+                      {instructorName.full_identification}
                     </option>
                   ))}
                 </select>

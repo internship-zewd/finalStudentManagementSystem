@@ -79,8 +79,10 @@ function DashContent() {
         },[])
       
         const getData=async(req,res)=>{
-await axios.get(`http://localhost:8081/instructor`)
-.then(console.log(res))
+await axios.get(`http://localhost:8081/instructor/getAll`)
+.then((res)=>{
+  
+  console.log(res.data)})
 .catch((err)=>{
   if(err){
     console.log(err)

@@ -21,6 +21,7 @@ function SignIn2 () {
             .then(function (res) {
                 console.log(res.data )
                 if (res.data.success) {
+                    
                     localStorage.setItem('username', username);
                     localStorage.setItem("access-token", res.data.accessToken);
                     localStorage.setItem("role", signInAs)

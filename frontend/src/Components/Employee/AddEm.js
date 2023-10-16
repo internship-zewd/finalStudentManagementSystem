@@ -79,15 +79,12 @@ function  AddEm () {
         }
 
         setErrors(validationErrors)
+       
         if(Object.keys(validationErrors).length===0){
-            alert('Employee Added successfully!')
-        }
-        if(Object.keys(validationErrors).length===0){
-            console.log(firstName+middleName+lastName+email+password+phone+salary)
 
         return await axios
         .post(`http://localhost:8081/${employeeType}/create`,{firstName,middleName,lastName,email,password,phone,salary})
-        .then((res)=>{console.log(res)})
+        .then((res)=>{alert(res.data)})
         .catch((err)=>{
             if(err){
                 console.log(err)

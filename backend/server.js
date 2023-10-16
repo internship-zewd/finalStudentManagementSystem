@@ -43,6 +43,9 @@ app.use("/auth", authRouter);
 var createFirst = require("./routes/createTestAll");
 app.use("/create", createFirst);
 
+const attendanceRoute=require('./routes/attendance')
+app.use("/attendance",attendanceRoute);
+
 var assessmentRouter = require("./routes/assessment");
 app.use("/assessment", assessmentRouter);
 var markListRouter = require("./routes/mark_list");
@@ -50,6 +53,9 @@ app.use("/markList", markListRouter);
 
 const todoRoute=require('./routes/todo')
 app.use('/todo',todoRoute)
+
+var createFirst = require("./routes/createTestAll");
+app.use("/create", createFirst);
 
 
 db.sequelize.sync({alter:true}).then((req)=>{

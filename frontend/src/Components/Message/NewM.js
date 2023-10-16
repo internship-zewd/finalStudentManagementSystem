@@ -2,28 +2,39 @@ import React,{useState} from 'react'
 import '../DashContent/DashContent.css'
 import './AddEm.css'
 import axios from 'axios';
-import {Link} from "react-router-dom";
+import {Link,Route,Navigate,Routes} from "react-router-dom";
 import {Filter} from './Filter'
 import { Table } from 'react-bootstrap';
+import SpecificMessageDashboard from './SpecificMessageDash'
+import App from '../../App'
 
 function NewM() {
 
     const [showAll,setShowAll]=useState(false)
     const [showSpecific,setShowSpecific]=useState(false)
     const [members,setMembers]=useState([])
-    const [attachment,setAttachment]=useState({})
+    const [attachment,setAttachment]=useState([])
     const [checked,setChecked]=useState(false)
     const [emails,setEmails]=useState([])
     const [search,setSearch]=useState("");
     const[dataInitial,setDataInitial]=useState([])
-    
-
     const [messageInfo,setMessageInfo]=useState({
         title:"",
         message:"",
         messageType:""
 
     })
+
+
+    const formData=new FormData()
+    formData.append("to",emails)
+    formData.append("subject",messageInfo.title)
+    formData.append("text",messageInfo.message)
+    formData.append("file",attachment)
+
+    
+
+    
 
     //***********this function sets the type of email that is sent**********
     //***********if it is sent as a group or specifically for selected members of the school**********
@@ -190,7 +201,7 @@ function NewM() {
                            <div className='input-box'>
                             <div className='gender-details'>
                                 <span className='details'>Attachment</span>
-                            <input id="attach" type="file" name="attachment" placeholder=".pdf,.exe,.txt,..." onChange={(e)=>{handleAttachment(e)}} />
+                            <input id="attach" type="file" name="attachment" placeholder=".pdf,.exe,.txt,..." onChange={(e)=>{handleAttachment(e)}} multiple />
                                </div></div>
                                <br/>
                             <button type="submit" className='btn btn-warning button' onSubmit={(e)=>handleSubmitAll(e)}>Send</button>
@@ -207,7 +218,9 @@ function NewM() {
                         <div className='user-deatils'>
                             <div className='input-box'>
                            <input type="text" placeholder="Search Employees" onChange={(e) => { setSearch(e.target.value) }} name="search" value={search} />
-                           <button  className='btn btn-warning button'><Link  style={{ textDecoration: 'none' }}to={{pathname:"/Message/Specific",state:{emails}}} >Send a message</Link> </button>           
+                                                    
+                               
+                           <button  className='btn btn-warning button' ><Link  style={{ textDecoration: 'none' }}to={{pathname:"/Message/Specific"}} >Send a message</Link> </button>  
                          </div></div>
                             <Table striped bordered hover>
 
@@ -220,7 +233,7 @@ function NewM() {
                                     </tr>
                                 </thead>
                                
-                                { members.filter((item)=>{
+ { members.filter((item)=>{
     return search.toLowerCase() === ''? item: 
     item.full_name.toLowerCase().includes(search);
 

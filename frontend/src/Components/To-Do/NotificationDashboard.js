@@ -3,10 +3,10 @@ import { useState } from 'react';
 import '../../App.css';
 import Sidebar from "../../layout/Sidebar/Sidebar"
 import ContentTop from '../ContentTop/ContentTop';
-import Attendance from './Attendance';
+import {Notification} from './Notification';
 
 
-function AttendanceDashboard() {
+function NotificationDashboard() {
   const [sidebarClose, setSidebarClose] = useState(false);
   const handleClick= () => {
     setSidebarClose(!sidebarClose);
@@ -19,7 +19,7 @@ function AttendanceDashboard() {
              <Sidebar sidebarClose={sidebarClose}  click={handleClick}/>
              <section className="dashboard">
                 <ContentTop click={handleClick}/>
-                 <Attendance />
+                 <Notification/>
               </section>
              
         </section>
@@ -28,4 +28,4 @@ function AttendanceDashboard() {
   )
 }
 
-export default AttendanceDashboard
+export default NotificationDashboard

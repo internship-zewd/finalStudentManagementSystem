@@ -1,36 +1,38 @@
 import React from 'react';
-import { useState,useEffect } from 'react';
+import { useState } from 'react';
 import '../../App.css';
 import Sidebar from "../../layout/Sidebar/Sidebar"
 import ContentTop from '../ContentTop/ContentTop';
-import DashContent from './DashContent';
-import axios from 'axios';
-import {Notification} from "../To-Do/Notification"
+import {SpecificMessage} from './SpecificMessage';
 
 
-function DashDashboard() {
+function SpecificMessageDashboard(props) {
+
+  const emails=props.emails
+  console.log("we're in here")
   const [sidebarClose, setSidebarClose] = useState(false);
-
-  
+ 
   const handleClick= () => {
     setSidebarClose(!sidebarClose);
   }
-
-
   return (
        <div className="full_content">
-        <section>                             
+        <section>
+                              
           
              <Sidebar sidebarClose={sidebarClose}  click={handleClick}/>
              <section className="dashboard">
                 <ContentTop click={handleClick}/>
-                 <DashContent />
+                 <SpecificMessage emails={emails}/>
+
+                 
               </section>
-             
+                
         </section>
+        
     </div>
     
   )
 }
 
-export default DashDashboard
+export default SpecificMessageDashboard

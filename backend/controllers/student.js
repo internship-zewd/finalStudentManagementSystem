@@ -26,7 +26,7 @@ const getOneStudent=async(req,res)=>{
     })}
 
 const getStudentByClass=async(req,res)=>{
-    const class_id=req.params.class_id
+    const class_id=req.params.id
     await student.findAll({where:{class_id:class_id}})
     .then((students)=>{
         res.send(students)

@@ -2,7 +2,7 @@ export const instructorSidebar = [
   {
     name: "Dashboard",
     iconClassName: "uil uil-estate",
-    to: "/",
+    to: "/dashboard",
   },
   {
     name: "To-Do",
@@ -31,7 +31,11 @@ export const instructorSidebar = [
     subMenus: [
       {
         name: "Attendance Form",
-        to: "/Attendance/Attendance Form",
+        to: "/Attendance/AttendanceForm",
+      },
+      {
+        name: "Manage Attendance",
+        to: "/Attendance/ManageAttendance",
       },
     ],
   },
@@ -50,12 +54,12 @@ export const instructorSidebar = [
   {
     name: "Marklist",
     iconClassName: "uil uil-list-ol",
-    to: "/Marklist/ Check Marklist",
+    to: "/Marklist/CheckMarklist",
   },
   {
     name: "Grade Report",
     iconClassName: "uil uil-file-alt",
-    to: "/Grade Report",
+    to: "/GradeReport",
   },
 
   {
@@ -65,11 +69,11 @@ export const instructorSidebar = [
     subMenus: [
       {
         name: "Attendance Report",
-        to: "/Report/Attendance Report",
+        to: "/Report/AttendanceReport",
       },
       {
         name: "Student Report Card",
-        to: "/Report/Student Report Card",
+        to: "/Report/StudentReportCard",
       },
     ],
   },

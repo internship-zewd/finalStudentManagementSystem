@@ -3,10 +3,10 @@ import { useState } from 'react';
 import '../../App.css';
 import Sidebar from "../../layout/Sidebar/Sidebar"
 import ContentTop from '../ContentTop/ContentTop';
-import ReportCard from './ReportCard';
+import Attendance from './Attendance';
 
 
-function ReportDashboard() {
+function ReportAttendanceDashboard() {
   const [sidebarClose, setSidebarClose] = useState(false);
   const handleClick= () => {
     setSidebarClose(!sidebarClose);
@@ -19,7 +19,7 @@ function ReportDashboard() {
              <Sidebar sidebarClose={sidebarClose}  click={handleClick}/>
              <section className="dashboard">
                 <ContentTop click={handleClick}/>
-                 <ReportCard />
+                 <Attendance />
               </section>
              
         </section>
@@ -28,4 +28,4 @@ function ReportDashboard() {
   )
 }
 
-export default ReportDashboard
+export default ReportAttendanceDashboard

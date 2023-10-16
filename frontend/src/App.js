@@ -23,18 +23,24 @@ import AllStDashboard from './Components/Student/AllDash';
 import AddStDashboard from './Components/Student/AddDash';
 import AddCoDashboard from './Components/Course/AddDash';
 import AllCoDashboard from './Components/Course/AllDash';
-import AttendanceDashboard from './Components/Report/AttendanceDash';
-import ReportDashboard from './Components/Report/ReportDash';
+import AttendanceDashboard from './Components/Attendance/AttendanceDash';
+import StudentReportDashboard from './Components/Report/StudentReportDash';
 import NewMDashboard from './Components/Message/MessageDash';
+import SpecificMessageDashboard from './Components/Message/SpecificMessageDash';
 import AddRemindDashboard from "./Components/To-Do/AddRemindDashboard";
 import ManageRemindDashboard from "./Components/To-Do/ManageRemindDashboard";
 import ArchiveRemindDashboard from './Components/To-Do/ArchiveRemindDashboard';
 import AssessmentDashboard from './Components/Assessment/AssessmentDash';
 import MarkDashboard from './Components/MarkList/MarkDash';
+import NotificationDashboard from "./Components/To-Do/NotificationDashboard"
+import ReportAttendanceDashboard from "./Components/Report/ReportAttendanceDash"
 
 function App() {
+ 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   
+
   useEffect(() => {
 
     if(localStorage.getItem("access-token") !== null){
@@ -46,10 +52,10 @@ function App() {
   
   return (
     <Router>
-      {console.log(isLoggedIn)}
+      {console.log(localStorage.getItem('role'))}
       <h1>{console.log(isLoggedIn)}</h1>
       <Routes>
-        <Route path="/" element={<SignIn2 />} />
+        <Route path="/" element={<SignIn2 />}/>
         <Route
           path="/dashboard"
           element={
@@ -70,12 +76,13 @@ function App() {
               <Navigate to="/" />
             )
           }
+          
         />
         <Route
           path="/Employee/AllEmployee"
           element={
             localStorage.getItem("access-token") !== null &&
-            localStorage.getItem("role") === "Admin" ? (
+            localStorage.getItem("role") === "Admin"||"Manager" ? (
               <AllEmDashboard />
             ) : (
               <Navigate to="/" />
@@ -139,27 +146,32 @@ function App() {
         />
         <Route
           path="/Course/AllCourse"
-          element={localStorage.getItem("access-token") !== null && localStorage.getItem("role") === "Admin" ? <AllCoDashboard /> : <Navigate to="/" />}
+          element={localStorage.getItem("access-token") !== null && localStorage.getItem("role") === "Admin" ? <AllCoDashboard /> : <Navigate to="/"/>}
       />
       <Route
           path="/To-Do/AddRemainder"
-          element={localStorage.getItem("access-token") !== null && localStorage.getItem("role") === "Admin"||"Instructor" ? <AddRemindDashboard/> : <Navigate to="/" />}
+          element={localStorage.getItem("access-token") !== null && localStorage.getItem("role") === "Admin"||"Instructor"||"Manager"||"Accountant" ? <AddRemindDashboard/> : <Navigate to="/" />}
       />
       <Route
           path="/To-Do/Manage"
-          element={localStorage.getItem("access-token") !== null && localStorage.getItem("role") === "Admin"||"Instructor" ? <ManageRemindDashboard/> : <Navigate to="/" />}
+          element={localStorage.getItem("access-token") !== null && localStorage.getItem("role") === "Admin"||"Instructor"||"Manager"||"Accountant" ? <ManageRemindDashboard/> : <Navigate to="/" />}
       />
       <Route
           path="/To-Do/Archive"
-          element={localStorage.getItem("access-token") !== null && localStorage.getItem("role") === "Admin"||"Instructor" ? <ArchiveRemindDashboard/> : <Navigate to="/" />}
+          element={localStorage.getItem("access-token") !== null && localStorage.getItem("role") === "Admin"||"Instructor"||"Manager"||"Accountant"? <ArchiveRemindDashboard/> : <Navigate to="/" />}
       />
+        <Route
+          path="/To-Do/Notification"
+          element={localStorage.getItem("access-token") !== null && localStorage.getItem("role") === "Admin"||"Instructor" ? <NotificationDashboard/> : <Navigate to="/" />}
+      />
+
 
       
         <Route
-          path="/Attendance/TakeAttendance"
+          path="/Attendance/AttendanceForm"
           element={
             localStorage.getItem("access-token") !== null &&
-            localStorage.getItem("role") === "Admin" ? (
+            localStorage.getItem("role") === "Instructor" ? (
               <AttendanceDashboard />
             ) : (
               <Navigate to="/" />
@@ -179,22 +191,22 @@ function App() {
         />
 
         <Route
-          path="/Report/Attendance"
+          path="/Report/AttendanceReport"
           element={
             localStorage.getItem("access-token") !== null &&
-            localStorage.getItem("role") === "Admin" ? (
-              <AttendanceDashboard />
+            localStorage.getItem("role") === "Admin"||"Instructor" ? (
+              <ReportAttendanceDashboard />
             ) : (
               <Navigate to="/" />
             )
           }
         />
         <Route
-          path="/Report/ReportCard"
+          path="/Report/StudentReportCard"
           element={
             localStorage.getItem("access-token") !== null &&
-            localStorage.getItem("role") === "Admin" ? (
-              <ReportDashboard />
+            localStorage.getItem("role") === "Admin"||"Instructor" ? (
+              <StudentReportDashboard />
             ) : (
               <Navigate to="/" />
             )
@@ -206,6 +218,17 @@ function App() {
             localStorage.getItem("access-token") !== null &&
             localStorage.getItem("role") === "Admin" ? (
               <NewMDashboard />
+            ) : (
+              <Navigate to="/" />
+            )
+          }
+        />
+        <Route
+          path="/Message/Specific"
+          element={
+            localStorage.getItem("access-token") !== null &&
+            localStorage.getItem("role") === "Admin" ? (
+              <SpecificMessageDashboard/>
             ) : (
               <Navigate to="/" />
             )

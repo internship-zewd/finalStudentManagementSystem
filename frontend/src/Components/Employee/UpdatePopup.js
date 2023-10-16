@@ -69,7 +69,7 @@ console.log(email+_email)
         console.log("im in here ")
         await axios.put(`http://localhost:8081/${employee_type}/update/${id}`,{firstName,middleName,lastName,email,password,phone,salary,fullIdentification} )
         .then((res)=>{
-            console.log(res.data)
+            alert(res.data)
             setTrigger(false)
             console.log("we're in put router ")
             window.location.reload()
@@ -86,7 +86,7 @@ console.log(email+_email)
          await axios.post(`http://localhost:8081/${employeeType}/create`,{firstName,middleName,lastName,email,password,phone,salary,username} )
     .then((res)=>{
 
-        console.log(res.data)
+        alert(res.data)
        
         console.log("we're in post hshahaa")
         console.log(`the ${employee_type} id is ${id}`)
@@ -99,7 +99,7 @@ console.log(email+_email)
     
         await axios.delete(`http://localhost:8081/${updateProp.employee_type}/delete/${id}`)
         .then((res)=>{
-            console.log('removed successfully')
+            
             setTrigger(false)
             window.location.reload()
         })
@@ -141,23 +141,23 @@ console.log(email+_email)
 
                                   <div className="input-box">
                                       <span className="details">First Name:</span>
-                                      <input type='text' id='firstName' required defaultValue={first_name} onChange={(e) => { setFirstName(e.target.value) }} name='firstName' placeholder='First Name of employee' autoComplete='on' /><br />
+                                      <input type='text' id='firstName' required defaultValue={firstName} onChange={(e) => { setFirstName(e.target.value) }} name='firstName' placeholder='First Name of employee' autoComplete='on' /><br />
                                   </div>
 
 
                                   <div className="input-box">
                                       <span className="details">Middle Name:</span>
-                                      <input type='text' id='middleName' required defaultValue={middle_name} onChange={(e) => { setMiddleName(e.target.value) }} name='middleName' placeholder='Middle Name of employee' autoComplete='on' /><br />
+                                      <input type='text' id='middleName' required defaultValue={middleName} onChange={(e) => { setMiddleName(e.target.value) }} name='middleName' placeholder='Middle Name of employee' autoComplete='on' /><br />
                                   </div>
 
                                    <div className="input-box">
                                        <span className="details">Last Name:</span>
-                                       <input type='text' id='lastName' required defaultValue={last_name} onChange={(e) => { setLastName(e.target.value) }} name='lastName' placeholder='Last Name of employee' autoComplete='on' /><br />
+                                       <input type='text' id='lastName' required defaultValue={lastName} onChange={(e) => { setLastName(e.target.value) }} name='lastName' placeholder='Last Name of employee' autoComplete='on' /><br />
                                   </div>
 
                                      <div className="input-box">
                                           <span className="details">Email:</span>
-                                          <input type='email' id='email' required defaultValue={_email} onChange={(e) => { setEmail(e.target.value) }} name='email' placeholder='Email' autoComplete='on' /><br />
+                                          <input type='email' id='email' required defaultValue={email} onChange={(e) => { setEmail(e.target.value) }} name='email' placeholder='Email' autoComplete='on' /><br />
                                      </div>
 
                                      <div className="input-box">
@@ -180,9 +180,7 @@ console.log(email+_email)
 
                                 
                                                  <button type='submit' className="btn btn-info btn-block" name='submit' onChange={handleSubmit} >Submit</button>
-                                                 <button className="btn btn-info btn-block" onClick={ ()=>{ 
-                                                    window.location.reload()
-                                                    setTrigger(false)}}> close </button>  
+                                                 <button className="btn btn-info btn-block" onClick={ ()=>{setTrigger(false)}}> close </button>  
                                                  </div>
     </form>
                    

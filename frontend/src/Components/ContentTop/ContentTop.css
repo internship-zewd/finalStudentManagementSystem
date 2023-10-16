@@ -73,7 +73,6 @@
     cursor: pointer;
 
 }
-
  .top .profile {
     color: var(--text-color);
     cursor: pointer;
@@ -132,3 +131,35 @@
 .dropdown:hover .dropDownPContent {
     display: block;
 }
+
+.notification-icon {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .notification-dot {
+    position: absolute;
+    top: 9px;
+    right: 5px;
+    /* bottom: 4px; */
+    width: 7px;
+    height: 7px;
+    background-color: rgb(213, 0, 0);
+    border-radius: 50%;
+  }
+  
+  @keyframes bell-animation {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.2);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  .animated-bell {
+    animation: bell-animation 1s infinite;
+  }

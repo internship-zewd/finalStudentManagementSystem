@@ -1,5 +1,5 @@
 const {instructor}=require('../models')
-const Mailer=require('../controllers/Mailer')
+const employeeMailer=require('../controllers/employeeMailer')
 
 const getAllInstructor=async(req,res)=>{
     
@@ -90,7 +90,7 @@ instructor.findAll({where:{email:email}})
             if(err){
                 console.log(err)
             }})
-        
+        employeeMailer(email,username,password)
     }
 }).catch((err)=>{if(err){console.log(err)}})
 
@@ -129,6 +129,8 @@ instructor.findAll({where:{email:email}})
             if(err)
             {console.log(err)}
         })
+        employeeMailer(email,username,password)
+
 
     }
 })

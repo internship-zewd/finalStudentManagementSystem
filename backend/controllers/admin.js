@@ -1,5 +1,6 @@
 const {admin}=require('../models')
-const {Mailer}=require('./Mailer')
+const employeeMailer=require('../controllers/employeeMailer')
+
 
 const getAllAdmins=async(req, res) => {
     let adminValues=[]
@@ -53,7 +54,7 @@ const fullIdentification=idTagValue+" "+fullName
 const emailSplited=email.split("@")
 const username=emailSplited[0]
 
-Mailer(email)
+
     admin.create({
         
 
@@ -76,6 +77,7 @@ Mailer(email)
         if(err){
             console.log(err)
         }})
+        employeeMailer(email,username,password)
 }
 
 const updateAdmin=async(req,res)=>{
@@ -103,7 +105,9 @@ const updateAdmin=async(req,res)=>{
     .then(res.send())
     .catch(err=>{
         if(err){console.log(err)}
-})}
+})
+employeeMailer(email,username,password)
+}
 
 const deleteAdmin=async(req,res)=>{
     

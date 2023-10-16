@@ -2,8 +2,9 @@ const express=require("express")
 const router=express.Router()
 const {getAllClass,getByCourse, createClass,updateClass}=require("../controllers/class_room")
 const {getOneClass}=require("../controllers/class_room")
+const { validateToken } = require("../JWT")
 
-router.get("/getAll",getAllClass)
+router.get("/getAll",validateToken, getAllClass)
 router.put("/update",updateClass)
 
 router.get("/getOne/:id",getOneClass)

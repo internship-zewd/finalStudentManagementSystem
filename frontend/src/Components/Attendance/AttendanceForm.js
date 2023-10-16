@@ -23,7 +23,7 @@ const AttendanceForm = () => {
     
 },[])
 const getData=async()=>{
-await axios.get("http://localhost:8081/class_room/getAll")
+await axios.get(`http://localhost:8081/class_room/getAll`)
     .then((res)=>{
     setClasses(res.data)
     console.log(res.data)
@@ -133,17 +133,6 @@ await axios.get("http://localhost:8081/class_room/getAll")
       <AttendanceFormTitle>Attendance Form</AttendanceFormTitle>
       <div className="user-details">
       <form >
-      <div className='input-box'>
-      <input
-                  type="text"
-                  placeholder="Search Employees"
-                  onChange={(e) => {
-                    setSearch(e.target.value);
-                  }}
-                  name="search"
-                  value={search}
-                />
-        </div>
         <div className='input-box'>
         <select required onChange={(e)=>{getStudent(e.target.value)}} defaultValue="">
                 <option value="">pick a class</option>
@@ -153,7 +142,7 @@ await axios.get("http://localhost:8081/class_room/getAll")
 
                 ))}   
             </select>
-        </div>
+        </div><br/>
         <AttendanceTable>
           <thead>
             <tr>
@@ -173,7 +162,8 @@ await axios.get("http://localhost:8081/class_room/getAll")
           </tbody>
         </AttendanceTable>
         </form>
-        <button type="button" onClick={()=>{handleAttendance()}} >Submit Attendance</button>
+        <br/>
+        <button className= "btn btn-warning button" type="button" onClick={()=>{handleAttendance()}} >Submit Attendance</button>
       
       </div>
     </AttendanceFormContainer>

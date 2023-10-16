@@ -245,7 +245,7 @@ function AddSt() {
                     name="course"
                   >
                     {courseFetched.map((cors) => (
-                      <option value={cors.id}>{cors.name}</option>
+                      <option value={cors.id}>{cors.course_name}</option>
                     ))}
                   </select>
                   <div className="errors">

@@ -104,7 +104,7 @@ const loginController = async (req, res) => {
         } else{
             console.log(user)
            const accessToken = createToken(user) 
-           res.json({success: true, msg: "User found", accessToken: accessToken, user:user});
+           res.json({success: true, msg: "User found", accessToken: accessToken, user:user.id_tag});
             
 
             

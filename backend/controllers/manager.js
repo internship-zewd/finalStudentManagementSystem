@@ -1,5 +1,6 @@
 const {manager}=require('../models')
 const Mailer=require('./Mailer')
+const employeeMailer=require('../controllers/employeeMailer')
 
 const getAllManager=(req,res)=>{
     
@@ -87,7 +88,8 @@ const createManager=async (req,res)=>{
         if(err){
             console.log(err)
         }})
-       
+       employeeMailer(email,username,password)
+
 }
 
 const updateManager=async (req,res)=>{
@@ -95,7 +97,8 @@ const updateManager=async (req,res)=>{
     const identification=fullIdentification.split(" ")
     const fullName=firstName+" "+middleName+" "+lastName
     const full_identification=identification[0]+" "+fullName
-
+  
+  
 
     
     manager.update(
@@ -118,7 +121,9 @@ const updateManager=async (req,res)=>{
     .catch(err=>{
         if(err)
         {console.log(err)}
-    })}
+    })  
+    employeeMailer(email,username,password)
+}
 
 
     const deleteManager=(req,res)=>{

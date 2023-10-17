@@ -31,7 +31,7 @@ function NewM() {
     formData.append("subject",messageInfo.title)
     formData.append("text",messageInfo.message)
     formData.append("file",attachment)
-
+console.log(emails)
     
 
     
@@ -75,19 +75,19 @@ function NewM() {
     
 
     const handleAttachment=(e)=>{
-      const file=e.target.files[0]
-      const reader=new FileReader()
+      const file=e.target.files
+    //   const reader=new FileReader()
 
-      reader.onload = () => {
-        const attachmentData = reader.result;
+    //   reader.onload = () => {
+    //     const attachmentData = reader.result;
     
-        setAttachment({
-          name: file.name,
-          data: attachmentData,
-        });
-      };
+    //     setAttachment({
+    //       name: file.name,
+    //       data: attachmentData,
+    //     });
+    //   };
     
-      reader.readAsDataURL(file);
+    //   reader.readAsDataURL(file);
       
     }
     const fetchAll=async()=>{
@@ -134,7 +134,7 @@ function NewM() {
         console.log("were hereeeeeee")
     
         e.preventDefault()
-        await axios.post(`http://localhost:8081/message/create/${type}`,{messageInfo,attachment})
+        await axios.post(`http://localhost:8081/message/create/${type}`,formData,{headers:{'Content-Type':'multipart/form-data'},})
         .then((res)=>{console.log(res)
             alert("message sent successfully")})
             .catch((err)=>{if(err){console.log(err)
@@ -220,7 +220,7 @@ function NewM() {
                            <input type="text" placeholder="Search Employees" onChange={(e) => { setSearch(e.target.value) }} name="search" value={search} />
                                                     
                                
-                           <button  className='btn btn-warning button' ><Link  style={{ textDecoration: 'none' }}to={{pathname:"/Message/Specific"}} >Send a message</Link> </button>  
+                           <button  className='btn btn-warning button' ><Link  style={{ textDecoration: 'none' }}to={{pathname:"/Message/Specific", state:"emails"}} >Send a message</Link> </button>  
                          </div></div>
                             <Table striped bordered hover>
 

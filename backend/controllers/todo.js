@@ -3,50 +3,48 @@ const moment=require('moment')
 const {Op}=require('sequelize')
 const {admin, instructor, manager, accountant} = require('../models')
 
-const createReminder=(req,res)=>{
+const createReminder=async(req,res)=>{
 
 
-    const {name,description,time,date,notify,days,username, role}= req.body.reminder;
-//     const due=new Date(date)
-//     console.log(due.getDate())
-//    const dumb= due.setDate(due.getDate-days)
+    const {name,description,time,date,notify,days,username, role,user}= req.body.reminder;
 console.log(req.body.reminder)
 const due=moment(date).subtract(days,'days').toDate();
 
-let userTag = null
-if (role === "Admin") {
-    userTag = admin.findOne({
-        where: {
-            username: username
-        },
-        attributes: ['id_tag']
-    })
-}
-if (role === "Instructor") {
-    userTag = instructor.findOne({
-        where: {
-            username: username
-        },
-        attributes: ['id_tag']
-    })
-}
-if (role === "Manager") {
-    userTag = manager.findOne({
-        where: {
-            username: username
-        },
-        attributes: ['id_tag']
-    })
-}
-if (role === "Accountant") {
-    userTag = accountant.findOne({
-        where: {
-            username: username
-        },
-        attributes: ['id_tag']
-    })
-}
-console.log(due)
+// let userTag = null
+// if (role === "Admin") {
+//     userTag = await admin.findOne({
+//         where: {
+//             username: username
+//         },
+//         attributes: ['id_tag']
+//     })
+// }
+// if (role === "Instructor") {
+//     userTag = await instructor.findOne({
+//         where: {
+//             username: username
+//         },
+//         attributes: ['id_tag']
+//     })
+// }
+// if (role === "Manager") {
+//     userTag = await manager.findOne({
+//         where: {
+//             username: username
+//         },
+//         attributes: ['id_tag']
+//     })
+// }
+// if (role === "Accountant") {
+//     userTag = await accountant.findOne({
+//         where: {
+//             username: username
+//         },
+//         attributes: ['id_tag']
+//     })
+// }
+// console.log(userTag)
+// const idTag=userTag.id_tag
 
     todo.create({
         name:name,
@@ -56,7 +54,7 @@ console.log(due)
         status:false,
         notify:notify,
         due:due,
-        user:userTag.id_tag
+        user:user
     })
     .then(
         res.send()
@@ -69,9 +67,9 @@ console.log(due)
 
 const getAllReminders=async(req,res)=>{
     console.log('im here')
-   const {username}=req.params
+   const {user}=req.params
 
-    await todo.findAll({where:{username:username}})
+    await todo.findAll({where:{user:user}})
     .then((todos)=>{
         console.log(todos)
         res.send(todos)
@@ -151,6 +149,15 @@ const getDue=async(req,res)=>{
     .catch((err)=>{if(err){console.log(err)}})
 
 }
+const deleteTodoEmployee=async(req,res)=>{
+    const {user}=req.params
+    await todo.destroy({where:{user:user}})
+    .then(res.send())
+    .catch((err)=>{
+        if(err){console.log(err)}
+    })
+
+}
 
 
 
@@ -161,5 +168,6 @@ module.exports={
     getOneReminder,
     updateReminderPopup,
     deleteReminder,
+    deleteTodoEmployee,
     getDue,
 }

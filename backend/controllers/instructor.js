@@ -1,5 +1,10 @@
 const {instructor}=require('../models')
-const employeeMailer=require('../controllers/employeeMailer')
+const {employeeMailer}=require('./employeeMailer')
+
+const {generatePassword}=require('./generatePassword')
+const {hashPassword}=require('./hashPassword')
+
+
 
 const getAllInstructor=async(req,res)=>{
     
@@ -57,17 +62,23 @@ const getOneInstructor=(req,res)=>{
 
 const createInstructor=async (req,res)=>{
     const userEmail=req.body.email
-    const {firstName,middleName,lastName,email,password,phone,salary,date}=req.body
+    const {firstName,middleName,lastName,email,phone,salary}=req.body
     const previousId=await instructor.max('id');
     const idTag=previousId!==null?`INS${1000+previousId}`:`INS${1000}`
     const fullName=firstName+" "+middleName+" "+lastName
     const fullIdentification=idTag+" "+fullName
     const emailSplited=email.split("@")
+
+
+    const password=await generatePassword()
+    const hashedPassword=await hashPassword(password)
+
 const username=emailSplited[0]
 
 instructor.findAll({where:{email:email}})
 .then((instructors)=>{
     console.log(instructors)
+    console.log("this is hashed "+ hashedPassword)
     if(instructors.length!==0) {res.send("A user with the same email already exists, try again with a different email")}
     else{
         instructor.create({ 
@@ -76,13 +87,13 @@ instructor.findAll({where:{email:email}})
             full_name:fullName,
             full_identification:fullIdentification,
             email:email,
-            password:password,
+            password:hashedPassword,
             phone:phone,
             salary:salary,
             username:username,
     
         })
-        .then(res.send("Instructor successfully created")
+        .then(alert("Employee successfully created, username and password will be sent through the email registered.")
             // ()=>{if(res.status===200){console.log(Mailer(userEmail))}}
         )
     
@@ -91,6 +102,7 @@ instructor.findAll({where:{email:email}})
                 console.log(err)
             }})
         employeeMailer(email,username,password)
+
     }
 }).catch((err)=>{if(err){console.log(err)}})
 
@@ -100,7 +112,7 @@ instructor.findAll({where:{email:email}})
 }
 
 const updateInstructor=async (req,res)=>{
-    const {firstName,middleName,lastName,email,password,phone,salary,fullIdentification,username}=req.body;
+    const {firstName,middleName,lastName,email,phone,salary,fullIdentification}=req.body;
     const identification=fullIdentification.split(" ")
     const fullName=firstName+" "+middleName+" "+lastName
     const full_identification=identification[0]+" "+fullName
@@ -116,10 +128,8 @@ instructor.findAll({where:{email:email}})
             {
     
             full_name:fullName,
-            username:username,
             full_identification:full_identification,
             email:email,
-            password:password,
             phone:phone,
             salary:salary,
         },{ where:{id:req.params.id}})
@@ -129,7 +139,6 @@ instructor.findAll({where:{email:email}})
             if(err)
             {console.log(err)}
         })
-        employeeMailer(email,username,password)
 
 
     }
@@ -143,7 +152,7 @@ instructor.findAll({where:{email:email}})
     
         const ins_id=req.params.id
         instructor.destroy({where:{id:ins_id}})       
-        .then((res)=>{console.log(res)})
+        .then(res.send("deleted successfully"))
         .catch((err)=>{
             if(err){
                 console.log(err)

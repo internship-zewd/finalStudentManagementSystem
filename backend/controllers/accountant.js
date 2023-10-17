@@ -1,5 +1,8 @@
 const {accountant}=require('../models')
-const Mailer=require('./Mailer')
+const {employeeMailer}=require('./employeeMailer')
+const {generatePassword}=require('./generatePassword')
+const {hashPassword}=require('./hashPassword')
+   
 
 const getAllAccountant=(req,res)=>{
     
@@ -57,16 +60,15 @@ const getOneAccountant=(req,res)=>{
 
 const createAccountant=async (req,res)=>{
     const userEmail=req.body.email
-    const {firstName,middleName,lastName,email,password,phone,salary}=req.body
+    const {firstName,middleName,lastName,email,phone,salary}=req.body
     const previousId=await accountant.max('id');
     const idTag=previousId!==null?`ACC${1000+previousId}`:`ACC${1000}`
     const fullName=firstName+" "+middleName+" "+lastName
     const fullIdentification=idTag+" "+fullName
-    const emailSplited=email.split("@")
-    const username=emailSplited[0]
-     
-
-
+    const emailSplited=email.split("@") 
+    const password=await generatePassword()
+    const hashedPassword=await hashPassword(password)
+ const username=emailSplited[0]
     
     accountant.create({
 
@@ -75,7 +77,7 @@ const createAccountant=async (req,res)=>{
         username:username,
         full_identification:fullIdentification,
         email:email,
-        password:password,
+        password:hashedPassword,
         phone:phone,
         salary:salary,
 
@@ -87,11 +89,12 @@ const createAccountant=async (req,res)=>{
         if(err){
             console.log(err)
         }})
+        employeeMailer(email,username,password)
        
 }
 
 const updateAccountant=async (req,res)=>{
-    const {firstName,middleName,lastName,email,password,phone,salary,fullIdentification,username}=req.body;
+    const {firstName,middleName,lastName,email,phone,salary,fullIdentification}=req.body;
     const identification=fullIdentification.split(" ")
     const fullName=firstName+" "+middleName+" "+lastName
     const full_identification=identification[0]+" "+fullName
@@ -103,9 +106,7 @@ const updateAccountant=async (req,res)=>{
             full_name:fullName,
             full_identification:full_identification,
             email:email,
-            password:password,
             phone:phone,
-            username:username,
             salary:salary,
     },
 
@@ -124,12 +125,13 @@ const updateAccountant=async (req,res)=>{
     
         const acc_id=req.params.id
         accountant.destroy({where:{id:acc_id}})       
-        .then(res.send())
+        .then(res.send("Deleted successfully!"))
         .catch((err)=>{
             if(err){
                 console.log(err)
             }
         })
+
         
     
     }

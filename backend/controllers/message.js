@@ -8,8 +8,8 @@ const allEmployees=async(req,res)=>{
     let employeeEmail=[]
 
 
-    const {title,message}=req.body.messageInfo
-    const attachment=req.attachment
+    const {to,subject,text}=req.body
+    const attachment=req.files
     let members=[]
 members.push(await manager.findAll())
 members.push(await accountant.findAll()) 
@@ -43,7 +43,7 @@ console.log("this is ittttttttttt"+ path)
 
 
 
-Mailer(employeeEmail,title,message,attachment,path)
+Mailer(employeeEmail,subject,text,attachment)
 }).catch((err)=>{if(err){console.log(err)}})
 
 }
@@ -52,6 +52,7 @@ Mailer(employeeEmail,title,message,attachment,path)
 
 
 const getAllMembers=async(req,res)=>{
+    
 
     let members=[]
     members.push(await manager.findAll())
@@ -86,12 +87,9 @@ const getAllMembers=async(req,res)=>{
 
 
 const allMembers=async(req,res)=>{
-    
+    const {to,subject,text}=req.body
+    const attachment=req.files
 
-    multerFunction()
-    console.log(req.body)
-    const {title,message}=req.body.messageInfo
-    const attachment=req.attachment
     let members=[]
 members.push(await manager.findAll())
 members.push(await accountant.findAll()) 
@@ -108,13 +106,13 @@ Promise.all(members)
     sendEmployees.push(employee)
     employeeEmail.push(employee.email)
     
-        })
+    }) 
+
     })
     console.log(employeeEmail)
     console.log(attachment)
-
+  Mailer(employeeEmail,subject,text,attachment)
 console.log(sendEmployees)
-Mailer(employeeEmail,title,message,attachment)
 }).catch((err)=>{if(err){console.log(err)}
 
 
@@ -123,10 +121,11 @@ Mailer(employeeEmail,title,message,attachment)
 
 
 const allInstructors=async(req,res)=>{
-    multerFunction()
+    
+    const {to,subject,text}=req.body
+    const attachment=req.files
 
-    const {title,message}=req.body.messageInfo
-    const attachment=req.attachment
+
     await instructor.findAll()
     .then((instructors)=>{
         let emails=[]
@@ -135,8 +134,8 @@ const allInstructors=async(req,res)=>{
             
         })
         console.log(emails)
-
-        Mailer(emails,title,message,attachment)
+      Mailer(emails,subject,text,attachment)
+        
     })
     .catch((err)=>{if(err){res.send(err)}})}
 
@@ -148,10 +147,10 @@ const allInstructors=async(req,res)=>{
 
 
     const allManagers=async(req,res)=>{
-        multerFunction()
+        const {to,subject,text}=req.body
+        const attachment=req.files
+   
 
-        const {title,message}=req.body.messageInfo
-        const attachment=req.attachment
         await manager.findAll()
         .then((managers)=>{
             let emails=[]
@@ -160,8 +159,7 @@ const allInstructors=async(req,res)=>{
                 
             })
             console.log(emails)
-    
-            Mailer(emails,title,message,attachment)
+     Mailer(emails,subject,text,attachment)
         })
         .catch((err)=>{if(err){res.send(err)}})}
 
@@ -170,10 +168,10 @@ const allInstructors=async(req,res)=>{
 
 
         const allStudents=async(req,res)=>{
-            multerFunction()
-
-            const {title,message}=req.body.messageInfo
-            const attachment=req.attachment
+            const {to,subject,text}=req.body
+            const attachment=req.files
+      
+        
             await student.findAll()
             .then((students)=>{
                 let emails=[]
@@ -182,8 +180,7 @@ const allInstructors=async(req,res)=>{
                     
                 })
                 console.log(emails)
-        
-                Mailer(emails,title,message,attachment)
+          Mailer(emails,subject,text,attachment)
             })
             .catch((err)=>{if(err){res.send(err)}})}
 
@@ -194,10 +191,9 @@ const allInstructors=async(req,res)=>{
 
 
             const allAccountants=async(req,res)=>{
+                const {to,subject,text}=req.body
+                const attachment=req.files
 
-                multerFunction()
-                const {title,message}=req.body.messageInfo
-                const attachment=req.attachment
                 await accountant.findAll()
                 .then((accountants)=>{
                     let emails=[]
@@ -206,8 +202,8 @@ const allInstructors=async(req,res)=>{
                         
                     })
                     console.log(emails)
-            
-                    Mailer(emails,title,message,attachment)
+    Mailer(emails,subject,text,attachment)
+                   
                 })
                 .catch((err)=>{if(err){res.send(err)}})}
 
@@ -222,11 +218,11 @@ const allInstructors=async(req,res)=>{
 
 
                 const allAdmins=async(req,res)=>{
+                    const {to,subject,text}=req.body
+                    const attachment=req.files
+               
 
-                    multerFunction()
-                    const {title,message}=req.body.messageInfo
-                    const attachment=req.attachment
-                    await admin.findAll()
+                 await admin.findAll()
                     .then((admins)=>{
                         let emails=[]
                         admins.forEach((admin)=>{
@@ -234,8 +230,8 @@ const allInstructors=async(req,res)=>{
                             
                         })
                         console.log(emails)
+                 Mailer(emails,subject,text,attachment)
                 
-                        Mailer(emails,title,message,attachment)
                     })
                     .catch((err)=>{if(err){res.send(err)}})}
     
@@ -253,12 +249,13 @@ const allInstructors=async(req,res)=>{
 
 const sendSpecific=(req,res)=>{
     
-    // multerFunction()
-    const {emails,attachment}=req.body
-    const {title,message}=req.body.messageInfo
+    // 
+    const files=req.files
+    const {to,subject,text}=req.body
+    console.log(req.body.to)
 
     try{
-      Mailer(emails,title,message,attachment)
+      Mailer(to,subject,text,files)
       window.alert("message sent successfuly")
     }
     catch{(err)=>{

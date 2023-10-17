@@ -56,7 +56,7 @@ module.exports=(sequelize,DataTypes)=>{
             },
 
         },
-        username:{
+        user:{
             type:DataTypes.STRING,
             allowNull:false,
             validate:{

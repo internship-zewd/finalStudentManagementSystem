@@ -5,6 +5,7 @@ const { passwordReset } = require ('../models');
 const { instructor } = require ('../models');
 const { manager }= require ('../models');
 const { accountant } = require ('../models');
+const bcrypt = require('bcryptjs')
 
 const crypto = require('crypto');
 const nodemailer = require('nodemailer')
@@ -64,50 +65,72 @@ const loginController = async (req, res) => {
     const name = body.username;
     const password = body.password;
     const role = body.signInAs;
+    let hashedPassword = null
     try {
         let user = null;
 
         if(role === "Admin"){
-            user = await admin.findOne({
+
+            hashedPassword = await admin.findOne({
                 where:{
-                    username: name,
-                    password: password
-                }
-            });
+                    username: name
+                },
+                attributes: ['password', 'username']
+            })
         }
         if(role === "Manager"){
-            user = await manager.findOne({
+
+            hashedPassword = await manager.findOne({
                 where:{
-                    username: name,
-                    password: password
-                }
-            });
+                    username: name
+                },
+                attributes: ['password', 'username']
+            })
         }
         if(role === "Accountant"){
-            user = await accountant.findOne({
+           
+            hashedPassword = await accountant.findOne({
                 where:{
-                    username: name,
-                    password: password
-                }
-            });
+                    username: name
+                },
+                attributes: ['password', 'username']
+            })
         }
         if(role === "Instructor"){
-            user = await instructor.findOne({
+           
+            hashedPassword = await instructor.findOne({
                 where:{
-                    username: name,
-                    password: password
-                }
-            });
+                    username: name
+                },
+                attributes: ['password', 'username', 'id_tag']
+            })
         }
-        if(!user){
-            res.json({success: false, msg: "User doesn't exist"});
-        } else{
-            console.log(user)
-           const accessToken = createToken(user) 
-           res.json({success: true, msg: "User found", accessToken: accessToken, user:user.id_tag});
-            
 
-            
+        const comparePasswords = async (password, hashedPassword) => {
+            try {
+              const isMatch = await bcrypt.compare(password, hashedPassword);
+              return isMatch;
+            } catch (error) {
+              console.error('Error comparing passwords:', error);
+              throw error;
+            }
+          }
+          
+        if( !hashedPassword.username ){
+            res.json({success: false, msg: "Username doesn't exist"});
+        } else{
+            comparePasswords(password, hashedPassword.password)
+            .then(isMatch => {
+              if (isMatch) {
+                const accessToken = createToken(user) 
+                res.json({success: true, msg: "User found", accessToken: accessToken, user:hashedPassword.id_tag});
+              } else {
+                console.log('Password does not match!');
+              }
+            })
+            .catch(error => {
+              console.error('Error:', error);
+            });   
         }
     } catch (error) {
         res.json({msg: "Error in selection", error});

@@ -5,9 +5,12 @@ import './Remainder.css'
 import axios from 'axios';
 
 function AddRemainder() {
-  const [errors, setErrors] = useState('');
+  const [errors, setErrors] = useState([]);
+  const id_tag=localStorage.getItem('id_tag')
   const username=localStorage.getItem('username')
   const role=localStorage.getItem('role')
+  console.log(role)
+
   const [reminder,setReminder]=useState({
     name:"",
     date:"",
@@ -16,6 +19,7 @@ function AddRemainder() {
     notify:true,
     days:0,
     username:username,
+    user:id_tag,
     role: role
 });
 

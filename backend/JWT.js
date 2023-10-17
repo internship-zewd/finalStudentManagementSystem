@@ -14,6 +14,7 @@ const validateToken= (req, res, next) => {
         const validToken = verify(accessToken, "createjwtsecreat")
         if(validToken) {
             req.authenticated = true
+            req.username = validToken.username
             return next
         }
     } catch (err) {

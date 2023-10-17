@@ -124,7 +124,19 @@ function AllEm() {
         console.log(id)
 
            e.preventDefault()
-    await axios.delete(`http://localhost:8081/${employee}/delete/${id}`)
+    let user=""
+    await axios.get(`http://localhost:8081/${employee}/getOne/${id}`)
+    .then((res)=>{
+    user =res.data.id_tag
+    }).catch((err)=>{if(err){console.log(err)}})
+
+
+    await axios.delete(`http://localhost:8081/todo/deleteTodoEmployee/${user}`)
+    .then((res)=>{alert(res.data)})
+    .catch((err)=>{if(err){console.log(err)}})
+
+
+     await axios.delete(`http://localhost:8081/${employee}/delete/${id}`)
     .then((res)=>{console.log("deleted"+ res)})
     .catch((err)=>{if(err){console.log(err)}})
     // window.location.reload()
@@ -172,10 +184,8 @@ function AllEm() {
             </tr>
           </thead>
           <tbody>
-            {data
-              .filter((item) => {
-                return search.toLowerCase() === ""
-                  ? item
+            {data.filter((item) => {
+                return search.toLowerCase() === ""? item
                   : item.full_name.toLowerCase().includes(search);
               })
               .map((item, index) => (

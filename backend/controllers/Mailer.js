@@ -5,7 +5,7 @@ const path = require('path');
 
 require('dotenv').config()
 
-function Mailer(email,title,message,attachment,path){
+function Mailer(email,title,message,attachment){
     console.log(email)
    const transporter=nodeMailer.createTransport({
     service:'gmail',
@@ -22,13 +22,16 @@ const mailOptions={
     to:email,
     subject:title,
     text:message,
-    attachments:[
+    attachments:[attachment.map((attach)=>(
+
         {
-            filename:attachment.originalname,
-            content:attachment.data,
-            path:path
+            filename:attach.originalName,
+            content:attach.data,
+            path:file.path
         
         }
+    ))
+        
     ],
 
 

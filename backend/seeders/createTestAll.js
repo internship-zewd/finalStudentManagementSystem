@@ -39,7 +39,7 @@ const createTestAll = async(req, res, next) => {
           const rowCountInstructor = await instructor.count();
           if (rowCountInstructor === 0) {
             console.log("Table is empty");
-            const previousInstructorId = await instructor.max("id");  0
+            const previousInstructorId = await instructor.max("id"); 
       
             const idTagValue =
               previousInstructorId !== null

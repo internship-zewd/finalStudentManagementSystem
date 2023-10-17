@@ -122,7 +122,7 @@ function AddSt() {
     }
     if (Object.keys(validationErrors).length === 0) {
       return await axios
-        .post("http://localhost:8081/student", {
+        .post("http://localhost:8081/student/create", {
           username,
           email,
           phonenumber,

@@ -67,11 +67,11 @@ useEffect(()=>{
                         </div>
                 </div>
                 
-               {isVisible && <button><Link  style={{ textDecoration: 'none' }}to={{pathname:"../To-Do/Notification"}} ><div class="notification-icon"><i class="uil uil-bell notify animated-bell"></i><span class="notification-dot"></span></div></Link></button> } 
+               {isVisible && <button className='todobtn'><Link  style={{ textDecoration: 'none' }}to={{pathname:"../To-Do/Notification"}} ><div class="notification-icon"><i class="uil uil-bell notify animated-bell"></i><span class="notification-dot"></span></div></Link></button> } 
                 
-                {isInvisible && <button><Link  style={{ textDecoration: 'none' }}to={{pathname:"../To-Do/Notification"}} ><i className="uil uil-bell notify"></i></Link></button>}
+                {isInvisible && <button className='todobtn'><Link  style={{ textDecoration: 'none' }}to={{pathname:"../To-Do/Notification"}} ><i className="uil uil-bell notify"></i></Link></button>}
                
-                <button><Link  style={{ textDecoration: 'none' }}to={{pathname:"../To-Do/Archive"}} ><i className="uil uil-schedule toDo"></i></Link></button>
+                <button className='todobtn'><Link  style={{ textDecoration: 'none' }}to={{pathname:"../To-Do/Archive"}} ><i className="uil uil-schedule toDo"></i></Link></button>
             </div>
   )
 }

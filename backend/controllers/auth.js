@@ -10,55 +10,7 @@ const bcrypt = require('bcryptjs')
 const crypto = require('crypto');
 const nodemailer = require('nodemailer')
 
-// const loginController = async (req, res) => {
-//     const body = req.body;
-//     const name = body.username;
-//     const password = body.password;
-//     const role = body.signInAs;
-//     try {
-//         const user = null;
 
-//         if(role === "Admin"){
-//             user = await admin.findOne({
-//             where:{
-//             username: name,
-//             password: password
-//             }})
-//         }
-//         if(role === "Manager"){
-//             user = await manager.findOne({
-//             where:{
-//             username: name,
-//             password: password
-//             }})
-//         }
-//         if(role === "Accountant"){
-//             user = await accountant.findOne({
-//             where:{
-//             username: name,
-//             password: password
-//             }})
-//         }
-//         if(role === "Instructor"){
-//             user = await instructor.findOne({
-//             where:{
-//             username: name,
-//             password: password
-//             }})
-//         }
-//         if(!user){
-//             res.json({success: false, msg: "User doesn't exist"});
-//         }
-
-//         else{
-//             res.json({msg: "Use found"})
-//         }
-//     } catch (error) {
-//         res.json({msg: "Error in selection", error});
-//     }
-    
-   
-//    }
 
 const loginController = async (req, res) => {
     const body = req.body;
@@ -75,7 +27,7 @@ const loginController = async (req, res) => {
                 where:{
                     username: name
                 },
-                attributes: ['password', 'username']
+                attributes: ['password', 'username', 'id', 'id_tag']
             })
         }
         if(role === "Manager"){
@@ -84,7 +36,7 @@ const loginController = async (req, res) => {
                 where:{
                     username: name
                 },
-                attributes: ['password', 'username']
+                attributes: ['password', 'username', 'id', 'id_tag']
             })
         }
         if(role === "Accountant"){
@@ -93,7 +45,7 @@ const loginController = async (req, res) => {
                 where:{
                     username: name
                 },
-                attributes: ['password', 'username']
+                attributes: ['password', 'username', 'id', 'id_tag']
             })
         }
         if(role === "Instructor"){
@@ -102,7 +54,7 @@ const loginController = async (req, res) => {
                 where:{
                     username: name
                 },
-                attributes: ['password', 'username', 'id_tag']
+                attributes: ['password', 'username', 'id_tag', 'id']
             })
         }
 
@@ -122,7 +74,7 @@ const loginController = async (req, res) => {
             comparePasswords(password, hashedPassword.password)
             .then(isMatch => {
               if (isMatch) {
-                const accessToken = createToken(user) 
+                const accessToken = createToken(hashedPassword) 
                 res.json({success: true, msg: "User found", accessToken: accessToken, user:hashedPassword.id_tag});
               } else {
                 console.log('Password does not match!');

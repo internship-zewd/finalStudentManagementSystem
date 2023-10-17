@@ -41,18 +41,17 @@ const getStudentByClass=async(req,res)=>{
 
 
 const createStudent=async(req,res)=>{
-    const {firstName,middleName,lastName,email,phonenumber,gender,course,class_room,paymentStatus,dob}=req.body
-    const fullName=firstName+" "+middleName+" "+lastName
+    const {username,email,phonenumber,gender,course,classs,paymentStatus,dob}=req.body
     
     const previousId= await student.max('id')
     const idTag= previousId!==null? `STU${1000+previousId}`:`STU${1000}`
-    const fullIdentification=idTag+" "+fullName
+    const fullIdentification=idTag+" "+username
     // Mailer(email)
     student.create({
         
     
         id_tag:idTag,
-        full_name:fullName,
+        full_name:username,
         full_identification:fullIdentification,
         email:email,
         phonenumber :phonenumber,
@@ -61,7 +60,7 @@ const createStudent=async(req,res)=>{
         paymentStatus : paymentStatus,
         dob : dob,
         course_id:course,
-        class_id:class_room
+        class_id:classs
         
             
         })

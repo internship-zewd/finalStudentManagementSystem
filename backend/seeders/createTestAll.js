@@ -3,6 +3,7 @@ const { instructor } = require('../models');
 const { course } = require('../models')
 const { manager } = require('../models')
 const { accountant } = require('../models');
+const {hashPassword} = require('../controllers/hashPassword')
 
 const createTestAll = async(req, res, next) => {
     
@@ -21,7 +22,8 @@ const createTestAll = async(req, res, next) => {
       
             // Combine idTagValue and instructor name
             const fullAdmin = `${idTagValue} ${adminName}`;
-      
+            const password = "testAdmin1"
+            const hashedPassword = await hashPassword(password)
             await admin.create({
               full_name: adminName,
               id_tag: idTagValue,
@@ -30,7 +32,7 @@ const createTestAll = async(req, res, next) => {
               email: "test@gmail.com",
               salary: 2000,
               phone: '+251939881190',
-              password: 'testAdmin1'
+              password: hashedPassword
       
             });
           }

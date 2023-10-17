@@ -38,9 +38,6 @@ else if( role === "Admin"){
   else if( role === "Accountant"){
     menuItems = accountantSidebar
   }
-  else if (role == undefined) {
-    menuItems = []
-  }
 //  menuItems =[
 //     {
 //         name:"Dashboard", 
